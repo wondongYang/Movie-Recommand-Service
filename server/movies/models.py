@@ -11,8 +11,3 @@ class Movie(models.Model):
     release_date = models.CharField(max_length=50)
     overview = models.TextField()
     poster_path = models.CharField(max_length=500, blank=True, null=True)
-
-
-class Actor(models.Model):
-    movie = models.ManyToManyField(Movie, related_name='actors')
-    name = models.CharField(max_length=50)
