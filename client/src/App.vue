@@ -1,12 +1,23 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="nav" class="navbar navbar-light bg-light sticky-top mb-5">
+      <div class="container">
+        <span class="navbar-brand me-auto">SPA Movie App</span>
+        <router-link :to="{name: 'Home'}">Home</router-link>
+        <router-link :to="{name: 'Recommend'}" class="ms-3">Recommendation</router-link>
+      </div>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  created: function () {
+    this.$store.dispatch('getHomeMovies')
+  }
+}
+</script>
 
 <style>
 #app {
