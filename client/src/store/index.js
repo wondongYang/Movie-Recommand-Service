@@ -34,13 +34,13 @@ export default new Vuex.Store({
         }
       })
       .then(response => {
-        console.log(response)
         commit('SAVE_HOME_MOVIES', response.data.results)
       })
       .catch(error => {
         console.log(error)
       })
     },
+    
     addMyList: function ({commit}, item) {
       commit('ADD_MY_LIST', item)
     },
