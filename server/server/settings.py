@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'accounts',
     'community',
 
+    'django_seed',
     'rest_framework',
     'corsheaders',
 
@@ -58,7 +59,7 @@ MIDDLEWARE = [
 ]
 
 # 모든 Origin 허용
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'server.urls'
 
