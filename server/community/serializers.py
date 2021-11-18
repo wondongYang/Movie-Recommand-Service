@@ -10,7 +10,6 @@ class ReviewSerializer(serializers.ModelSerializer):
             model = Movie
             fields = ('id', 'title',)
     
-    title = serializers.CharField(min_length=1, max_length=100)
     movies = MovieSerilizer(many=True, read_only=True)
 
     class Meta:
