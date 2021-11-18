@@ -1,10 +1,18 @@
 <template>
   <div class="home">
-    <!-- <button @click="getHomeMovies">Test Button</button> -->
-    <br>
-    <div v-if="HomeMovies" class="d-flex flex-wrap justify-content-evenly p-3">
-      <MovieCard v-for="(movie, idx) in HomeMovies" :key="idx" :movie="movie" />
+    <div>
+      <p> 메인 화면이 들어갈 공간입니다. (Carousel이나 Wallpaper 등...)</p>
+      <p> Soy Source </p>
     </div>
+    <br>
+    <div>
+      <h3>새로 개봉한 영화들</h3>
+      <div v-if="HomeMovies" class="d-flex flex-wrap justify-content-evenly p-3">
+        <MovieCard v-for="(movie, idx) in HomeMovies" :key="idx" :movie="movie" />
+      </div>
+
+    </div>
+
   </div>
 </template>
 
