@@ -6,11 +6,11 @@ class Genre(models.Model):
 
 
 class Movie(models.Model):
-    genre = models.ManyToManyField(Genre, related_name='movies')
+    genre_ids = models.ManyToManyField(Genre, related_name='movies')
     title = models.CharField(max_length=100)
     release_date = models.CharField(max_length=50)
     overview = models.TextField()
-    poster_path = models.CharField(max_length=500)
+    poster_path = models.CharField(max_length=500, blank=True, null=True)
 
 
 class Actor(models.Model):
