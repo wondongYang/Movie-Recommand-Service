@@ -17,7 +17,7 @@
           <p>{{ movie.overview }}</p>
         </div>
       </div>
-      <MovieDetailReview :movieId="movie.id" :movie="movie" />
+      <MovieDetailReview :movieId="movie.id" v-bind:movie="movie" />
     </div>
   </div>
 </template>
@@ -55,6 +55,7 @@ export default {
       })
       .then(response => {
         this.movie = response.data
+        this.$store.dispatch('selectMovie', this.movie)
       })
     }
   },
