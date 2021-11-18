@@ -4,7 +4,13 @@
       <div class="container">
         <span class="navbar-brand me-auto">SPA Movie App</span>
         <router-link :to="{name: 'Home'}">Home</router-link>
-        <router-link :to="{name: 'Recommend'}" class="ms-3">Recommendation</router-link>
+        <div v-if="login">
+          <router-link :to="{name: 'Recommend'}" class="ms-3">Recommendation</router-link>
+        </div>
+        <div v-else>
+          <router-link :to="{name: 'Login'}" class="ms-3">Login</router-link>
+          <router-link :to="{name: 'Signup'}" class="ms-3">Signup</router-link>
+        </div>
       </div>
     </div>
     <router-view/>
@@ -13,8 +19,20 @@
 
 <script>
 export default {
+  name: 'App',
+  data: function () {
+    return {
+      login: false
+    }
+  },
+
   created: function () {
+    // 영화 들고 오기
     this.$store.dispatch('getHomeMovies')
+
+    // state로 로그인 체크
+    this.login = this.$store.state.login
+    
   }
 }
 </script>

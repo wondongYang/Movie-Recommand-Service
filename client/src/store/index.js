@@ -9,10 +9,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    login: false,
     HomeMovies: null,
     userMovieList: [],
   },
   mutations: {
+    SET_LOGIN: function (state) {
+      state.login = true
+    },
+    SET_LOGOUT: function (state) {
+      state.login = false
+    },
+
     SAVE_HOME_MOVIES: function (state, movies) {
       state.HomeMovies = movies
     },
@@ -22,6 +30,23 @@ export default new Vuex.Store({
 
   },
   actions: {
+    // JWT Token 받기
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`,
+      }
+      return config
+    },
+
+    setLogin: function ({commit}) {
+      commit('SET_LOGIN')
+    },
+    
+    setLogout: function ({commit}) {
+      commit('SET_LOGOUT')
+    },
+
     // Home.vue에서 보여줄 영화들 긁어오기
     getHomeMovies: function ({commit}) {
       axios({
@@ -41,9 +66,6 @@ export default new Vuex.Store({
       })
     },
     
-    addMyList: function ({commit}, item) {
-      commit('ADD_MY_LIST', item)
-    },
   },
   modules: {
   },

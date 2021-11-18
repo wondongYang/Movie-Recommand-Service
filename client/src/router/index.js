@@ -5,6 +5,8 @@ import Recommend from '@/views/Recommend'
 import MovieDetail from '@/views/MovieDetail'
 import ReviewForm from '@/views/ReviewForm'
 import ReviewDetail from '@/views/ReviewDetail'
+import Signup from '@/views/accounts/Signup'
+import Login from '@/views/accounts/Login'
 
 Vue.use(VueRouter)
 
@@ -13,6 +15,16 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/accounts/signup',
+    name: 'Signup',
+    component: Signup
+  },
+  {
+    path: '/accounts/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/recommend',
@@ -34,6 +46,7 @@ const routes = [
     name: 'ReviewDetail',
     component: ReviewDetail
   },
+  
 ]
 
 const router = new VueRouter({
