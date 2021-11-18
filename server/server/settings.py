@@ -58,7 +58,7 @@ MIDDLEWARE = [
 ]
 
 # 모든 Origin 허용
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'server.urls'
 
