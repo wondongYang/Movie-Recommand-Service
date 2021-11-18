@@ -1,0 +1,28 @@
+<template>
+  <div class="card m-3" style="width: 18rem;">
+    <img :src="fullPosterPath" class="card-img-top" alt="">
+    <div class="card-body">
+      <router-link :to="{name: 'MovieDetail', params: {movieId: movie.id}}" :movie="movie"><h3>{{movie.title}}</h3></router-link>
+      <p>{{movie.overview}}</p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'MovieCard',
+  props: {
+    movie: Object,
+  },
+  computed: {
+    fullPosterPath: function () {
+      const basePosterPath = 'https://image.tmdb.org/t/p/original'
+      return (basePosterPath + this.movie.poster_path)
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>
