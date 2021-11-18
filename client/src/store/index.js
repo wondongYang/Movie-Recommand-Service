@@ -13,8 +13,10 @@ export default new Vuex.Store({
     login: false,
     HomeMovies: null,
     userMovieList: [],
+    seletedMovie: null,
   },
   mutations: {
+    // Auth
     SET_LOGIN: function (state) {
       state.login = true
     },
@@ -22,12 +24,16 @@ export default new Vuex.Store({
       state.login = false
     },
 
+    // Movies
     SAVE_HOME_MOVIES: function (state, movies) {
       state.HomeMovies = movies
     },
-
+    SELECT_MOVIE: function (state, movie) {
+      state.seletedMovie = movie
+    }
   },
   actions: {
+    // Auth
     // JWT Token 받기
     setToken: function () {
       const token = localStorage.getItem('jwt')
@@ -36,11 +42,9 @@ export default new Vuex.Store({
       }
       return config
     },
-
     setLogin: function ({commit}) {
       commit('SET_LOGIN')
     },
-
     setLogout: function ({commit}) {
       commit('SET_LOGOUT')
     },
@@ -64,6 +68,9 @@ export default new Vuex.Store({
         console.log(error)
       })
     },
+    selectMovie: function ({commit}, movie) {
+      commit('SELECT_MOVIE', movie)
+    }
     
   },
   modules: {
