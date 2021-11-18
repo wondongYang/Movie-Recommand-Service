@@ -10,17 +10,15 @@ from .serializers import CommentSerializer, ReviewSerializer
 
 
 @api_view(['POST'])
-def review_create(request, movie_pk):
-    movie = get_object_or_404(Movie, pk=movie_pk)
+def review_create(request):
     serializer = ReviewSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie)
+        serializer.save()
         return Response(serializer.data)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def review_detail_or_update_or_delete(request, movie_pk, review_pk):
-    movie = get_object_or_404(Movie, pk=movie_pk)
+def review_detail_or_update_or_delete(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
 
     def review_detail():
@@ -30,7 +28,7 @@ def review_detail_or_update_or_delete(request, movie_pk, review_pk):
     def review_update():
         serializer = ReviewSerializer(instance=review, data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(movie=movie)
+            serializer.save()
             return Response(serializer.data)
     
     def review_delete():
