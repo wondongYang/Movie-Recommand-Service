@@ -24,9 +24,6 @@ export default new Vuex.Store({
     SAVE_HOME_MOVIES: function (state, movies) {
       state.HomeMovies = movies
     },
-    ADD_MY_LIST: function (state, item) {
-      state.userMovieList.push(item)
-    }
 
   },
   actions: {
@@ -42,7 +39,7 @@ export default new Vuex.Store({
     setLogin: function ({commit}) {
       commit('SET_LOGIN')
     },
-    
+
     setLogout: function ({commit}) {
       commit('SET_LOGOUT')
     },
