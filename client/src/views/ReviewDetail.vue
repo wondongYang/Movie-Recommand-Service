@@ -3,7 +3,11 @@
     <div v-if="review">
       <div>
         리뷰를 받았습니다.
-        리뷰 내용이 들어갈 공간: 
+        리뷰 내용이 들어갈 공간:
+        {{ review.user }}
+        {{ review.rank }}
+        {{ review.content }}
+        {{ review.updated_at }}
       </div>
       <div>
         수정 삭제 기능:
@@ -11,6 +15,8 @@
       </div>
       <div>
         리뷰 댓글이 들어갈 공간:
+        <ReviewDetailComments />
+        <!-- {{ review.comment_set }} -->
       </div>
     </div>
   </div>
@@ -18,10 +24,14 @@
 
 <script>
 import axios from 'axios'
+import ReviewDetailComments from '@/components/ReviewDetailComments'
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: 'ReviewDetail',
+  components: {
+    ReviewDetailComments, 
+  },
   data: function () {
     return {
       reviewId: this.$route.params.reviewId,
