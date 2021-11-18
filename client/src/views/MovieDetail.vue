@@ -6,7 +6,6 @@
         <div class="col-3">
           <img :src="fullPosterPath" alt="Movie Poster" class="img-fluid">
 
-
         </div>
         <div class="col-9">
           <h2 class="text-start">{{ movie.title }}</h2>
@@ -18,7 +17,7 @@
           <p>{{ movie.overview }}</p>
         </div>
       </div>
-      <MovieDetailReview :movieId="movie.id" />
+      <MovieDetailReview :movieId="movie.id" v-bind:movie="movie" />
     </div>
   </div>
 </template>
@@ -26,8 +25,9 @@
 <script>
 import axios from 'axios'
 import MovieDetailReview from '@/components/MovieDetailReview'
-const TMDB_BASEURL = 'https://api.themoviedb.org/3/movie/'
-const TMDB_API = process.env.VUE_APP_TMDB_API_KEY
+// const TMDB_BASEURL = 'https://api.themoviedb.org/3/movie/'
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
+// const TMDB_API = process.env.VUE_APP_TMDB_API_KEY
 export default {
   name: 'MovieDetail',
   components: {
@@ -46,14 +46,16 @@ export default {
     getMovieDetail: function (movieId) {
       axios({
         method: 'GET',
-        url: TMDB_BASEURL + movieId,
-        params: {
-          api_key: TMDB_API,
-          language: 'ko-KR'
-        }
+        // url: TMDB_BASEURL + movieId,
+        url: `${SERVER_URL}/movies/${movieId}`,
+        // params: {
+        //   api_key: TMDB_API,
+        //   language: 'ko-KR'
+        // }
       })
       .then(response => {
         this.movie = response.data
+        this.$store.dispatch('selectMovie', this.movie)
       })
     }
   },

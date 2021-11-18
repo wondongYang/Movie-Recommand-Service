@@ -6,7 +6,7 @@
     </div>
     <br>
     <div>
-      <h3>새로 개봉한 영화들</h3>
+      <h3>인기 영화들</h3>
       <div v-if="HomeMovies" class="d-flex flex-wrap justify-content-evenly p-3">
         <MovieCard v-for="(movie, idx) in HomeMovies" :key="idx" :movie="movie" />
       </div>
@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     HomeMovies: function () {
-      return this.$store.state.HomeMovies
+      return this.$store.state.HomeMovies.slice(0, 19)
     }
   },
   // created: function () {

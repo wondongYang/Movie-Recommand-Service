@@ -1,13 +1,11 @@
 <template>
   <div class="container">
-    <div class="mb-3 text-start">
-      <label for="title" class="form-label me-auto">제목</label>
-      <input id="title" type="text" v-model.trim="title" class="form-control"> <br>
-    </div>
-    <div class="mb-3 text-start">
+    <p>{{movie}}</p>
+
+    <!-- <div class="mb-3 text-start">
       <label for="movie" class="form-label me-auto">영화</label>
-      <input id="movie" type="text" v-model.trim="movie" class="form-control"> <br>
-    </div>
+      <input id="movie" type="text" placeholder="영화" class="form-control"> <br>
+    </div> -->
     <div class="mb-3 text-start">
       <label for="rank" class="form-label me-auto">별점</label>
       <input id="rank" type="text" v-model.trim="rank" class="form-control"> <br>
@@ -31,9 +29,9 @@ export default {
   name: 'ReviewForm',
   data: function () {
     return {
+      movie: null,
       title: '',
       content: '',
-      movie: '',
       rank: '',
 
     }
@@ -41,14 +39,15 @@ export default {
   methods: {
     createReview: function () {
       const review = {
-        title: this.title,
+        movie: this.movie,
         content: this.content,
         rank: this.rank,
+        user: 1
       }
       console.log(review)
       axios({
         method: 'post',
-        url: `${SERVER_URL}/create/`,
+        url: `${SERVER_URL}/community/create/`,
         data: review,
       })
       .then(response => {
@@ -58,8 +57,10 @@ export default {
         console.log(error)
         
       })
-
     },
+  },
+  created: function () {
+    this.movie = this.$route.params.movieId
   }
 }
 </script>
