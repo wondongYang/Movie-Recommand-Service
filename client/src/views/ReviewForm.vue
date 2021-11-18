@@ -26,6 +26,7 @@
 
 <script>
 import axios from 'axios'
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
 export default {
   name: 'ReviewForm',
   data: function () {
@@ -47,13 +48,11 @@ export default {
       console.log(review)
       axios({
         method: 'post',
-        url: '' ,
+        url: `${SERVER_URL}/create/`,
         data: review,
       })
       .then(response => {
         console.log(response)
-        
-
       })
       .catch(error => {
         console.log(error)
