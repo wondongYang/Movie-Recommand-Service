@@ -2,8 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-const TMDB_API = process.env.VUE_APP_TMDB_API_KEY
-const TMDB_BASEURL = 'https://api.themoviedb.org/3/movie/'
+// const TMDB_API = process.env.VUE_APP_TMDB_API_KEY
+// const TMDB_BASEURL = 'https://api.themoviedb.org/3/movie/'
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 Vue.use(Vuex)
 
@@ -49,14 +50,15 @@ export default new Vuex.Store({
       axios({
         method: 'GET',
         // URL 필요에 따라 변경 (Django 서버로, 혹은 TMDB의 top rated, latest, ...)
-        url: TMDB_BASEURL + 'popular',
-        params: {
-          api_key: TMDB_API,
-          language: 'ko-KR',
-        }
+        // url: TMDB_BASEURL + 'popular',
+        url: `${SERVER_URL}/movies/`
+        // params: {
+        //   api_key: TMDB_API,
+        //   language: 'ko-KR',
+        // }
       })
       .then(response => {
-        commit('SAVE_HOME_MOVIES', response.data.results)
+        commit('SAVE_HOME_MOVIES', response.data)
       })
       .catch(error => {
         console.log(error)
