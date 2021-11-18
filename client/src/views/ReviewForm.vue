@@ -1,12 +1,8 @@
 <template>
   <div class="container">
     <div class="mb-3 text-start">
-      <label for="title" class="form-label me-auto">제목</label>
-      <input id="title" type="text" v-model.trim="title" class="form-control"> <br>
-    </div>
-    <div class="mb-3 text-start">
       <label for="movie" class="form-label me-auto">영화</label>
-      <input id="movie" type="text" v-model.trim="movie" class="form-control"> <br>
+      <input id="movie" type="text" :placeholder="movie.title" class="form-control"> <br>
     </div>
     <div class="mb-3 text-start">
       <label for="rank" class="form-label me-auto">별점</label>
@@ -29,11 +25,12 @@ import axios from 'axios'
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
 export default {
   name: 'ReviewForm',
+  props: {
+    movie: Object,
+  },
   data: function () {
     return {
-      title: '',
       content: '',
-      movie: '',
       rank: '',
 
     }
