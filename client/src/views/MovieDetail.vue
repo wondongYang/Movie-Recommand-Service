@@ -21,7 +21,7 @@
         <MovieDetailReview :review="review" />
       </div>
       <div class="ms-auto">
-        <router-link :to="{name: 'ReviewForm'}" class="btn btn-primary ms-auto">리뷰 작성하기</router-link>
+        <router-link :to="{name: 'ReviewForm'}" class="btn btn-primary ms-auto" :movie="movie">리뷰 작성하기</router-link>
       </div>
     </div>
   </div>
