@@ -1,15 +1,18 @@
 <template>
-  <div>
-    <h1>Login</h1>
-    <div>
-      <label for="username">Username: </label>
-      <input type="text" id="username" v-model="credentials.username">
+  <div class="container">
+    <div class="row g-3 text-start">
+      <h1>로그인</h1>
+      <div class="">
+        <label for="username" class="form-label">계정 이름</label>
+        <input type="text" id="username" v-model="credentials.username" class="form-control">
+      </div>
+      <div>
+        <label for="password" class="form-label">비밀번호</label>
+        <input type="password" id="password" v-model="credentials.password" class="form-control">
+      </div>
     </div>
-    <div>
-      <label for="password">Password: </label>
-      <input type="password" id="password" v-model="credentials.password">
-    </div>
-    <button @click="login(credentials)">Login</button>
+    <button @click="login(credentials)" class="btn btn-primary m-3">로그인</button>
+    <router-link :to="{name: 'Home'}" class="btn btn-secondary m-3">뒤로</router-link>
   </div>
 </template>
 
@@ -39,6 +42,7 @@ export default {
         localStorage.setItem('jwt', response.data.token)  // 받아온 token을 localStorage에 저장
         // 이제 (signup과 token 발급을 제외한) django server 요청 시에는 token을 header에 넣어서 전달할 것 (TodoList 부분)
         this.$emit('login')   // "나 로그인했다!!!"고 상위 component에 전달
+        this.$store.state.login = true
         this.$router.push({name: 'Home'})   // Home으로 이동
       })
       .catch(error => {

@@ -6,6 +6,7 @@
         <router-link :to="{name: 'Home'}">Home</router-link>
         <div v-if="login">
           <router-link :to="{name: 'Recommend'}" class="ms-3">Recommendation</router-link>
+          <router-link to="#" @click.native="logout" class="ms-3">Logout</router-link>
         </div>
         <div v-else>
           <router-link :to="{name: 'Login'}" class="ms-3">Login</router-link>
@@ -23,6 +24,13 @@ export default {
   data: function () {
     return {
       login: false
+    }
+  },
+  methods: {
+    logout: function () {
+      localStorage.removeItem('jwt')
+      this.$store.dispatch('setLogout')
+      this.login = false
     }
   },
 

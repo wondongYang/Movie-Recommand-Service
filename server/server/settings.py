@@ -138,22 +138,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-# import datetime
+import datetime
 
-# JWT_AUTH = {
-#     # Token의 만료기간 5분 -> 1일로 연장
-#     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1)
-# }
+JWT_AUTH = {
+    # Token의 만료기간 5분 -> 1일로 연장
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1)
+}
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': (
-#         # 인증된(로그인한) 사용자가 요청했는지 확인
-#         'rest_framework.permissions.IsAuthenticated',
-#     ),
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         # JWT 토큰이 올바른(유효한)지 확인
-#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-#         # 'rest_framework.authentication.SessionAuthentication',
-#         # 'rest_framework.authentication.BasicAuthentication',
-#     ),
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        # 인증된(로그인한) 사용자가 요청했는지 확인
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # JWT 토큰이 올바른(유효한)지 확인
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+    ),
+}

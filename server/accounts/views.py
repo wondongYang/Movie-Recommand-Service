@@ -1,10 +1,12 @@
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from .serializers import UserSerializer
 
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def signup(request):
 	#1-1. Client에서 온 데이터를 받아서
     password = request.data.get('password')

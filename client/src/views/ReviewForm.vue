@@ -4,7 +4,7 @@
 
     <!-- <div class="mb-3 text-start">
       <label for="movie" class="form-label me-auto">영화</label>
-      <input id="movie" type="text" placeholder="영화" class="form-control"> <br>
+      <input id="movie" type="text" :placeholder="영화" class="form-control"> <br>
     </div> -->
     <div class="mb-3 text-start">
       <label for="rank" class="form-label me-auto">별점</label>
@@ -29,10 +29,11 @@ export default {
   name: 'ReviewForm',
   data: function () {
     return {
-      movie: null,
+      // movie: null,
       title: '',
       content: '',
       rank: '',
+      movie: '',
 
     }
   },
@@ -60,7 +61,7 @@ export default {
     },
   },
   created: function () {
-    this.movie = this.$route.params.movieId
+    this.movie = this.$store.state.selectedMovie
   }
 }
 </script>

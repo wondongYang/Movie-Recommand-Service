@@ -20,8 +20,11 @@
       <div v-for="(review, id) in movie.reviews" :key="id">
         <MovieDetailReview :review="review" />
       </div>
-      <div class="ms-auto">
-        <router-link :to="{name: 'ReviewForm'}" class="btn btn-primary ms-auto">리뷰 작성하기</router-link>
+      <div class="ms-auto" v-if="login">
+        <router-link :to="{name: 'ReviewForm'}" class="btn btn-primary ms-auto" :movie="movie">리뷰 작성하기</router-link>
+      </div>
+      <div class="ms-auto" v-else>
+        <router-link :to="{name: 'Login'}" :movie="movie">리뷰를 작성하려면 로그인하세요</router-link>
       </div>
     </div>
   </div>
@@ -68,7 +71,10 @@ export default {
     fullPosterPath: function () {
       const basePosterPath = 'https://image.tmdb.org/t/p/original'
       return (basePosterPath + this.movie.poster_path)
-    }
+    },
+    login: function () {
+      return this.$store.state.login
+    },
   },
   mounted: function () {
     this.getMovieDetail(this.movieId)
