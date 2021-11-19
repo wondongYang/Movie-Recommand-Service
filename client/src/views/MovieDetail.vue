@@ -17,7 +17,12 @@
           <p>{{ movie.overview }}</p>
         </div>
       </div>
-      <MovieDetailReview :movieId="movie.id" v-bind:movie="movie" />
+      <div v-for="(review, id) in movie.reviews" :key="id">
+        <MovieDetailReview :review="review" />
+      </div>
+      <div class="ms-auto">
+        <router-link :to="{name: 'ReviewForm'}" class="btn btn-primary ms-auto">리뷰 작성하기</router-link>
+      </div>
     </div>
   </div>
 </template>
