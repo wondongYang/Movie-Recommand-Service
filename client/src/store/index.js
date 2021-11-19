@@ -34,13 +34,13 @@ export default new Vuex.Store({
   actions: {
     // Auth
     // JWT Token 받기
-    setToken: function () {
-      const token = localStorage.getItem('jwt')
-      const config = {
-        Authorization: `JWT ${token}`,
-      }
-      return config
-    },
+    // setToken: function () {
+    //   const token = localStorage.getItem('jwt')
+    //   const config = {
+    //     Authorization: `JWT ${token}`,
+    //   }
+    //   return config
+    // },
     setLogin: function ({commit}) {
       commit('SET_LOGIN')
     },

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <p>{{movie}}</p>
+    <p>{{}}</p>
 
     <!-- <div class="mb-3 text-start">
       <label for="movie" class="form-label me-auto">영화</label>
@@ -33,26 +33,42 @@ export default {
       title: '',
       content: '',
       rank: '',
-      movie: '',
+      // movie: '',
 
     }
   },
+  // props: {
+  //   movie: Object,
+  // },
+
+
   methods: {
+    // 왜 setToken을 store에서 쓰면 Promise 객체로 나오는 걸까?
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`,
+      }
+      return config
+    },
+
     createReview: function () {
       const review = {
-        movie: this.movie,
+        movie: this.$route.params.movieId,
         content: this.content,
         rank: this.rank,
       }
-      console.log(review)
+      // console.log(review)
+      // console.log(this.$store.dispatch('setToken').value)
       axios({
         method: 'post',
         url: `${SERVER_URL}/community/create/`,
-        headers: this.$store.dispatch('setToken'),
+        // headers: this.$store.dispatch('setToken'),
+        headers: this.setToken(),
         data: review,
       })
-      .then(response => {
-        console.log(response)
+      .then(() => {
+        this.$router.push({name: 'MovieDetail', params: {'movieId': this.$route.params.movieId}})
       })
       .catch(error => {
         console.log(error)

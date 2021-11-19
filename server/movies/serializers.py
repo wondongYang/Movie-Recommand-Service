@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+# from server.accounts.serializers import UserSerializer
 from .models import Movie
 from community.models import Review
 from django.contrib.auth import get_user_model
@@ -7,28 +9,31 @@ class MovieListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Movie
-        fields = ('id', 'title', 'poster_path',)
+        fields = ('id', 'title', 'poster_path', 'genre_ids')
+        depth = 1
 
 
 class MovieSerializer(serializers.ModelSerializer):
 
-    class ReviewSerilizer(serializers.ModelSerializer):
-
+    class ReviewSerializer(serializers.ModelSerializer):
+        
         class UserSerializer(serializers.ModelSerializer):
 
             class Meta:
                 model = get_user_model()
-                fields = ('username',)
+                fields = ('id', 'username',)
 
-        user = UserSerializer(read_only=True) 
-
+        user = UserSerializer(read_only=True)
+        
         class Meta:
             model = Review
-            fields = ('id','content', 'rank', 'user')
-    
-    title = serializers.CharField(min_length=1, max_length=100)
-    reviews = ReviewSerilizer(many=True, read_only=True)
+            # fields = '__all__'
+            fields = ('id', 'content', 'rank', 'user')
+            
+    reviews = ReviewSerializer(many=True, read_only=True)
 
     class Meta:
         model = Movie
-        fields = ('id', 'title', 'genre_ids', 'overview', 'release_date', 'poster_path', 'reviews')
+        # fields = ('id', 'title', 'genre_ids', 'overview', 'release_date', 'poster_path', 'reviews')
+        fields = '__all__'
+        depth = 1
