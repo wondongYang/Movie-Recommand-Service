@@ -2,10 +2,10 @@
   <div class="container">
     <p>{{movie}}</p>
 
-    <div class="mb-3 text-start">
+    <!-- <div class="mb-3 text-start">
       <label for="movie" class="form-label me-auto">영화</label>
-      <input id="movie" type="text" :placeholder="$store.state.selectedMovie" class="form-control"> <br>
-    </div>
+      <input id="movie" type="text" :placeholder="영화" class="form-control"> <br>
+    </div> -->
     <div class="mb-3 text-start">
       <label for="rank" class="form-label me-auto">별점</label>
       <input id="rank" type="text" v-model.trim="rank" class="form-control"> <br>

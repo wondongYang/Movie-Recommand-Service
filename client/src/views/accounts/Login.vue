@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <h1>Login</h1>
-    <div>
-      <label for="username">Username: </label>
-      <input type="text" id="username" v-model="credentials.username">
+  <div class="container">
+    <div class="">
+      <h1>Login</h1>
+      <div>
+        <label for="username" class="">계정명: </label>
+        <input type="text" id="username" v-model="credentials.username">
+      </div>
+      <div>
+        <label for="password">비밀번호: </label>
+        <input type="password" id="password" v-model="credentials.password">
+      </div>
+      <button @click="login(credentials)">Login</button>
     </div>
-    <div>
-      <label for="password">Password: </label>
-      <input type="password" id="password" v-model="credentials.password">
-    </div>
-    <button @click="login(credentials)">Login</button>
   </div>
 </template>
 
