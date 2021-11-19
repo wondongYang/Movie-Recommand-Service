@@ -16,7 +16,7 @@ def review_create(request):
         serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     # else:
-        # return Response({'error': '로그인을 해주세요.'}, status=status.HTTP_401_UNAUTHORIZED)
+    #     return Response({'error': '로그인을 해주세요.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 # review detail을 get할 때와 put, delete할 때의 필요 권한이 다른 문제... (@permission_classes([AllowAny]))
@@ -55,14 +55,14 @@ def review_detail_or_update_or_delete(request, review_pk):
 
 @api_view(['POST'])
 def comment_create(request, review_pk):
-    if request.user.is_authenticated: 
-        review = get_object_or_404(Review, pk=review_pk)
-        serializer = CommentSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save(review=review)
-            return Response(serializer.data)
-    else:
-        return Response({'error': '로그인을 해주세요.'}, status=status.HTTP_401_UNAUTHORIZED) 
+    # if request.user.is_authenticated: 
+    review = get_object_or_404(Review, pk=review_pk)
+    serializer = CommentSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(review=review)
+        return Response(serializer.data)
+    # else:
+    #     return Response({'error': '로그인을 해주세요.'}, status=status.HTTP_401_UNAUTHORIZED) 
 
 @api_view(['POST'])
 def comment_delete(request, comment_pk):
