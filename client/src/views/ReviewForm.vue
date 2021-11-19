@@ -42,7 +42,6 @@ export default {
         movie: this.movie,
         content: this.content,
         rank: this.rank,
-        user: 1
       }
       console.log(review)
       axios({

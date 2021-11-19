@@ -1,20 +1,25 @@
 <template>
-  <div>
+  <div class="container">
     <div v-if="review">
       <div>
-        {{ review.user }}
-        {{ review.rank }}
-        {{ review.content }}
-        {{ review.updated_at }}
+        <span class="d-inline">
+          <span>{{ review.user }}님이 작성한 리뷰입니다.</span>
+          <span>{{ review.rank }}점</span>
+        </span>
+        <p>
+          {{ review.content }}
+        </p>
+          {{ review.updated_at }}
       </div>
-      <div>
-        수정 삭제 기능:
-
+      <div class="text-end">
+        <button class="btn btn-warning m-1">수정</button>
+        <button class="btn btn-warning m-1">삭제</button>
       </div>
       <div>
         리뷰 댓글이 들어갈 공간:
+        <!-- 현재 django에 Review에서 Comment를 불러올 related_name이 없음 -->
         <ReviewDetailComments />
-        <ReviewDetailCommentsform />
+        <ReviewDetailCommentsform :reviewId="reviewId" />
         <!-- {{ review.comment_set }} -->
       </div>
     </div>
@@ -44,7 +49,7 @@ export default {
         method: 'get',
         // django 에서 review detail을 받아올 주소
         url: `${SERVER_URL}/community/${this.reviewId}`,
-        // headers: 
+        headers: this.$store.dispatch('setToken'),
       })
       .then(response => {
         console.log(response)
@@ -59,7 +64,7 @@ export default {
       axios({
         method: 'delete',
         url: `${SERVER_URL}/community/${this.reviewId}`,
-        // headers: 
+        headers: this.$store.dispatch('setToken'),
       })
       .then(response => {
         console.log(response)
