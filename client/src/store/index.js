@@ -12,7 +12,6 @@ export default new Vuex.Store({
   state: {
     login: false,
     HomeMovies: null,
-    userMovieList: [],
     seletedMovie: null,
   },
   mutations: {
@@ -76,6 +75,8 @@ export default new Vuex.Store({
   modules: {
   },
   getters: {
-    
+    HomeMoviesCut: function (state) {
+      return state.HomeMovies.slice(0, 19)
+    }
   },
 })
