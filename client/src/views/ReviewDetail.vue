@@ -2,8 +2,6 @@
   <div>
     <div v-if="review">
       <div>
-        리뷰를 받았습니다.
-        리뷰 내용이 들어갈 공간:
         {{ review.user }}
         {{ review.rank }}
         {{ review.content }}
@@ -16,6 +14,7 @@
       <div>
         리뷰 댓글이 들어갈 공간:
         <ReviewDetailComments />
+        <ReviewDetailCommentsform />
         <!-- {{ review.comment_set }} -->
       </div>
     </div>
@@ -25,12 +24,13 @@
 <script>
 import axios from 'axios'
 import ReviewDetailComments from '@/components/ReviewDetailComments'
+import ReviewDetailCommentsform from '@/components/ReviewDetailCommentsform'
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: 'ReviewDetail',
   components: {
-    ReviewDetailComments, 
+    ReviewDetailComments, ReviewDetailCommentsform
   },
   data: function () {
     return {

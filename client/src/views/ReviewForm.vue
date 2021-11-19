@@ -48,6 +48,7 @@ export default {
       axios({
         method: 'post',
         url: `${SERVER_URL}/community/create/`,
+        headers: this.$store.dispatch('setToken'),
         data: review,
       })
       .then(response => {
