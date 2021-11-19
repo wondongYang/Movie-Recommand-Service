@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404
 
-from django.views.decorators.http import require_POST
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -11,14 +10,16 @@ from .serializers import CommentSerializer, ReviewSerializer
 
 @api_view(['POST'])
 def review_create(request):
-    if request.user.is_authenticated:
-        serializer = ReviewSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user)
-            return Response(serializer.data)
-    else:
-        return Response({'error': '로그인을 해주세요.'}, status=status.HTTP_401_UNAUTHORIZED)
+    # if request.user.is_authenticated:
+    serializer = ReviewSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    # else:
+        # return Response({'error': '로그인을 해주세요.'}, status=status.HTTP_401_UNAUTHORIZED)
 
+
+# review detail을 get할 때와 put, delete할 때의 필요 권한이 다른 문제... (@permission_classes([AllowAny]))
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def review_detail_or_update_or_delete(request, review_pk):
@@ -35,22 +36,22 @@ def review_detail_or_update_or_delete(request, review_pk):
                 serializer.save()
                 return Response(serializer.data)
         else:
-            return Response({'detail': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDON)
+            return Response({'error': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
     
     def review_delete():
         if request.user == review.user:
             review.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            return Response({'id': review_pk}, status=status.HTTP_204_NO_CONTENT)
         else:
-            return Response({'detail': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDON)
+            return Response({'error': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
 
+    
     if request.method == 'GET':
         return review_detail()
     elif request.method == 'PUT':
         return review_update()
     else:
         return review_delete()
-
 
 @api_view(['POST'])
 def comment_create(request, review_pk):
@@ -70,4 +71,4 @@ def comment_delete(request, comment_pk):
         comment.delete()
         return Response({ 'id': comment_pk })
     else:
-        return Response({'detail': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDON)
+        return Response({'error': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
