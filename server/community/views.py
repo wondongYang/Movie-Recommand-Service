@@ -50,3 +50,9 @@ def comment_create(request, review_pk):
     if serializer.is_valid(raise_exception=True):
         serializer.save(review=review)
         return Response(serializer.data)
+
+@api_view(['POST'])
+def comment_delete(request, comment_pk):
+    comment = get_object_or_404(Review, pk=comment_pk)
+    comment.delete()
+    return Response({ 'id': comment_pk })
