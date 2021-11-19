@@ -1,17 +1,18 @@
 <template>
   <div class="container">
-    <div class="">
-      <h1>Login</h1>
-      <div>
-        <label for="username" class="">계정명: </label>
-        <input type="text" id="username" v-model="credentials.username">
+    <div class="row g-3 text-start">
+      <h1>로그인</h1>
+      <div class="">
+        <label for="username" class="form-label">계정 이름</label>
+        <input type="text" id="username" v-model="credentials.username" class="form-control">
       </div>
       <div>
-        <label for="password">비밀번호: </label>
-        <input type="password" id="password" v-model="credentials.password">
+        <label for="password" class="form-label">비밀번호</label>
+        <input type="password" id="password" v-model="credentials.password" class="form-control">
       </div>
-      <button @click="login(credentials)">Login</button>
     </div>
+    <button @click="login(credentials)" class="btn btn-primary m-3">로그인</button>
+    <router-link :to="{name: 'Home'}" class="btn btn-secondary m-3">뒤로</router-link>
   </div>
 </template>
 
