@@ -42,12 +42,12 @@ export default {
         movie: this.movie,
         content: this.content,
         rank: this.rank,
-        user: 1
       }
       console.log(review)
       axios({
         method: 'post',
         url: `${SERVER_URL}/community/create/`,
+        headers: this.$store.dispatch('setToken'),
         data: review,
       })
       .then(response => {

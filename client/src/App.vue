@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <router-view/>
+    <router-view @login="login = true" />
   </div>
 </template>
 
