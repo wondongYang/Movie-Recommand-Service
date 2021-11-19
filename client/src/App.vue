@@ -2,8 +2,10 @@
   <div id="app">
     <div id="nav" class="navbar navbar-light bg-light sticky-top mb-5">
       <div class="container">
-        <span class="navbar-brand me-auto">SPA Movie App</span>
-        <router-link :to="{name: 'Home'}">Home</router-link>
+        <router-link class="text-decoration-none" :to="{name: 'Home'}">
+        <span class="navbar-brand me-auto">SoySource</span>
+        </router-link>
+        <!-- <router-link :to="{name: 'Home'}">Home</router-link> -->
         <div v-if="login">
           <router-link :to="{name: 'Recommend'}" class="ms-3">Recommendation</router-link>
           <router-link to="#" @click.native="logout" class="ms-3">Logout</router-link>
@@ -15,6 +17,11 @@
       </div>
     </div>
     <router-view @login="login = true" />
+
+    <footer>
+      
+    </footer>
+
   </div>
 </template>
 
