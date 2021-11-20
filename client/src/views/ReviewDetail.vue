@@ -18,6 +18,10 @@
       <div>
         리뷰 댓글이 들어갈 공간:
         <!-- 현재 django에 Review에서 Comment를 불러올 related_name이 없음 -->
+        <div v-for="(comment, idx) in review.comments" :key="idx">
+          {{comment.user.username}}: {{ comment.content }}
+        </div>
+
         <ReviewDetailComments />
         <ReviewDetailCommentsform :reviewId="reviewId" />
         <!-- {{ review.comment_set }} -->

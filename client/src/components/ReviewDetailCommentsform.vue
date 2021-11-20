@@ -24,6 +24,14 @@ export default {
     }
   },
   methods: {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`,
+      }
+      return config
+    },
+
     addComment: function () {
 
       const comment = {
@@ -32,7 +40,8 @@ export default {
       axios({
         method: 'post',
         url: `${SERVER_URL}/community/${this.reviewId}/comments/create/`,
-        headers: this.$store.dispatch('setToken'),
+        headers: this.setToken(),
+        // headers: this.$store.dispatch('setToken'),
         data: comment,
       })
       .then(response => {
