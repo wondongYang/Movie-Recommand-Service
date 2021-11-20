@@ -82,12 +82,11 @@ export default new Vuex.Store({
     },
     NewMovies: function (state) {
       const today = dayjs().format("YYYY-MM-DD")
-      console.log(today)
-      const ReleasedMovies = _.filter(state.HomeMovies, 'release_date' <= today)
-      console.log(ReleasedMovies)
-      const NewMoviesList = _.orderBy(state.HomeMovies, 'release_date', 'desc')
-      console.log(NewMoviesList.slice(0, 4))
-      return NewMoviesList.slice(0, 4)
+      const ReleasedMovies = state.HomeMovies.filter(function(i) {
+        return i.release_date <= today
+      })
+      const NewMoviesList = _.orderBy(ReleasedMovies, 'release_date', 'desc').slice(0, 4)
+      return NewMoviesList
     },
 
     // PopularMovies: function (state) {
