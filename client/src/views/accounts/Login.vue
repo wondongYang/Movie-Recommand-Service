@@ -41,7 +41,7 @@ export default {
       .then(response => {
         localStorage.setItem('jwt', response.data.token)  // 받아온 token을 localStorage에 저장
         // 이제 (signup과 token 발급을 제외한) django server 요청 시에는 token을 header에 넣어서 전달할 것 (TodoList 부분)
-        this.$emit('login')   // "나 로그인했다!!!"고 상위 component에 전달
+        // this.$emit('login')   // "나 로그인했다!!!"고 상위 component에 전달
         this.$store.state.login = true
         this.$router.push({name: 'Home'})   // Home으로 이동
       })

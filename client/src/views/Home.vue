@@ -7,8 +7,8 @@
     <br>
     <div>
       <h3>인기 영화들</h3>
-      <div v-if="HomeMovies" class="d-flex flex-wrap justify-content-evenly p-3">
-        <MovieCard v-for="(movie, idx) in HomeMovies" :key="idx" :movie="movie" />
+      <div v-if="$store.getters.HomeMoviesCut" class="d-flex flex-wrap justify-content-evenly p-3">
+        <MovieCard v-for="(movie, idx) in HomeMoviesCut" :key="idx" :movie="movie" />
       </div>
 
     </div>
@@ -27,10 +27,14 @@ export default {
     MovieCard,
   },
   computed: {
-    HomeMovies: function () {
-      return this.$store.state.HomeMovies.slice(0, 19)
+    HomeMoviesCut: function () {
+      return this.$store.getters.HomeMoviesCut
     }
   },
+  // beforeCreate: function () {
+  //   // 영화 들고 오기
+  //   this.$store.dispatch('getHomeMovies')
+  // }
   // created: function () {
   //   this.$store.dispatch('getHomeMovies')
   // },

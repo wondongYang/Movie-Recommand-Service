@@ -11,8 +11,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     login: false,
-    HomeMovies: null,
-    userMovieList: [],
+    HomeMovies: [],
     seletedMovie: null,
   },
   mutations: {
@@ -35,13 +34,13 @@ export default new Vuex.Store({
   actions: {
     // Auth
     // JWT Token 받기
-    setToken: function () {
-      const token = localStorage.getItem('jwt')
-      const config = {
-        Authorization: `JWT ${token}`,
-      }
-      return config
-    },
+    // setToken: function () {
+    //   const token = localStorage.getItem('jwt')
+    //   const config = {
+    //     Authorization: `JWT ${token}`,
+    //   }
+    //   return config
+    // },
     setLogin: function ({commit}) {
       commit('SET_LOGIN')
     },
@@ -76,6 +75,8 @@ export default new Vuex.Store({
   modules: {
   },
   getters: {
-    
+    HomeMoviesCut: function (state) {
+      return state.HomeMovies.slice(0, 19)
+    }
   },
 })

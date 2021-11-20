@@ -16,10 +16,10 @@
         </div>
       </div>
     </div>
-    <router-view @login="login = true" />
+    <router-view />
 
     <footer>
-      
+      <p>Powered by TMDB</p>
     </footer>
 
   </div>
@@ -30,7 +30,6 @@ export default {
   name: 'App',
   data: function () {
     return {
-      login: false
     }
   },
   methods: {
@@ -40,14 +39,14 @@ export default {
       this.login = false
     }
   },
-
+  computed: {
+    login: function () {
+      return this.$store.state.login
+    },
+  },
   created: function () {
     // 영화 들고 오기
     this.$store.dispatch('getHomeMovies')
-
-    // state로 로그인 체크
-    this.login = this.$store.state.login
-    
   }
 }
 </script>

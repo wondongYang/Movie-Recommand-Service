@@ -14,7 +14,9 @@ def review_create(request):
     # if request.user.is_authenticated:
     serializer = ReviewSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(user=request.user)
+        print(request.data)
+        movie = get_object_or_404(Movie, pk=request.data.get('movie'))
+        serializer.save(user=request.user, movie=movie)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     # else:
     #     return Response({'error': '로그인을 해주세요.'}, status=status.HTTP_401_UNAUTHORIZED)
