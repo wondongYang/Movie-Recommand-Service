@@ -15,9 +15,15 @@
         <MovieCard v-for="(movie, idx) in NewMovies" :key="idx" :movie="movie" />
       </div>
       <hr>
-      <!-- <h3>인기 영화</h3>
-      <div v-if="$store.getters.NewMovies" class="d-flex flex-wrap justify-content-evenly p-3">
-        <MovieCard v-for="(movie, idx) in NewMovies" :key="idx" :movie="movie" />
+      <h3>인기 영화</h3>
+      <!-- <div v-if="$store.getters.PopularMovies" class="d-flex flex-wrap justify-content-evenly p-3">
+        <MovieCard v-for="(movie, idx) in PopularMovies" :key="idx" :movie="movie" />
+      </div> -->
+      <hr>
+      <h3>장르별 영화</h3>
+      <p>액션</p>
+      <!-- <div v-if="$store.getters.PopularMovies" class="d-flex flex-wrap justify-content-evenly p-3">
+        <MovieCard v-for="(movie, idx) in PopularMovies" :key="idx" :movie="movie" />
       </div> -->
     </div>
 
@@ -41,6 +47,12 @@ export default {
     NewMovies: function () {
       return this.$store.getters.NewMovies
     },
+    // PopularMovies: function () {
+    //   return this.$store.getters.PopularMovies
+    // },
+    // ActionMovies: function () {
+    //   return this.$store.getters.ActionMovies
+    // },
   },
   // beforeCreate: function () {
   //   // 영화 들고 오기
