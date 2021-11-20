@@ -45,6 +45,13 @@ export default {
     },
   },
   created: function () {
+    // 로그인 체크
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      this.$store.state.login = true
+      // this.login = true
+    }
+
     // 영화 들고 오기
     this.$store.dispatch('getHomeMovies')
   }

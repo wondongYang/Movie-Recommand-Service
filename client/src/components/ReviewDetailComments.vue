@@ -1,13 +1,17 @@
 <template>
   <div>
+    <hr>
     
+    {{ comment.user.username }} : {{ comment.content }}
   </div>
 </template>
 
 <script>
 export default {
   name: 'ReviewDetailComments',
-
+  props: {
+    comment: Object,
+  }
 }
 </script>
 

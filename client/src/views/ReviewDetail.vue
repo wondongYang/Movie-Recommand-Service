@@ -16,10 +16,11 @@
         <button class="btn btn-warning m-1">삭제</button>
       </div>
       <div>
-        리뷰 댓글이 들어갈 공간:
         <!-- 현재 django에 Review에서 Comment를 불러올 related_name이 없음 -->
-        <ReviewDetailComments />
-        <ReviewDetailCommentsform :reviewId="reviewId" />
+        <div v-for="(comment, idx) in review.comments" :key="idx">
+          <ReviewDetailComments :comment="comment" />
+        </div>
+        <ReviewDetailCommentsform :reviewId="reviewId" @commentAdded="getReview" />
         <!-- {{ review.comment_set }} -->
       </div>
     </div>
