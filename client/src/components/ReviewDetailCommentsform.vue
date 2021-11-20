@@ -34,23 +34,24 @@ export default {
 
     addComment: function () {
 
-      const comment = {
-        content: this.commentInput,
+      if (this.commentInput != '') {
+        const comment = {
+          content: this.commentInput,
+        }
+        axios({
+          method: 'post',
+          url: `${SERVER_URL}/community/${this.reviewId}/comments/create/`,
+          headers: this.setToken(),
+          // headers: this.$store.dispatch('setToken'),
+          data: comment,
+        })
+        .then(() => {
+          this.commentInput = ''
+        })
+        .catch(error => {
+          console.log(error)
+        })
       }
-      axios({
-        method: 'post',
-        url: `${SERVER_URL}/community/${this.reviewId}/comments/create/`,
-        headers: this.setToken(),
-        // headers: this.$store.dispatch('setToken'),
-        data: comment,
-      })
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-
     }
   },
 }
