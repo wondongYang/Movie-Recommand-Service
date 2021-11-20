@@ -2,7 +2,9 @@
   <div>
     <!-- 최초에 로드되지 않은 movie(null)를 참조할 때 error가 발생하는 것을 막기 위해 v-if를 사용합니다-->
     <div v-if="movie" class="container">
-      <router-link :to="{name: 'Home',}" class="btn btn-secondary me-auto" >뒤로</router-link>
+      <div class="d-flex">
+        <router-link :to="{name: 'Home',}" class="btn btn-secondary me-auto" >뒤로</router-link>
+      </div>
       <hr>
       <div class="row">
         <div class="col-3">
@@ -19,14 +21,18 @@
           <p>{{ movie.overview }}</p>
         </div>
       </div>
+      <hr>
       <div v-for="(review, id) in movie.reviews" :key="id">
         <MovieDetailReview :review="review" />
       </div>
+      <div class="d-flex">
+
       <div class="ms-auto" v-if="login">
         <router-link :to="{name: 'ReviewForm'}" class="btn btn-primary ms-auto" :movie="movie">리뷰 작성하기</router-link>
       </div>
       <div class="ms-auto" v-else>
         <router-link :to="{name: 'Login'}" :movie="movie">리뷰를 작성하려면 로그인하세요</router-link>
+      </div>
       </div>
     </div>
   </div>

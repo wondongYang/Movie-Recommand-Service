@@ -1,11 +1,23 @@
 <template>
   <div class="container">
-    <div v-if="review">
+    <div v-if="review" class="row">
+      <div class="col-12 text-start">
+      <h3>
+        {{ review.movie.title }}
+      </h3>
       <div>
-        <span class="d-inline">
-          <span>{{ review.user }}님이 작성한 리뷰입니다.</span>
-          <span>{{ review.rank }}점</span>
+        <span>
+        {{ review.user.username }}
         </span>
+      </div>
+      <div class="text-end">
+        <span>
+        {{ review.rank }}
+        </span>
+      </div>
+
+      <!--  -->
+      <div>
         <p>
           {{ review.content }}
         </p>
@@ -23,6 +35,7 @@
         <ReviewDetailCommentsform :reviewId="reviewId" @commentAdded="getReview" />
         <!-- {{ review.comment_set }} -->
       </div>
+    </div>
     </div>
   </div>
 </template>

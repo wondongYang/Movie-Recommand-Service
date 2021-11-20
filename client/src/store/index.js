@@ -97,5 +97,8 @@ export default new Vuex.Store({
       // genre_ids안의 리스트 중에 28(action)이 존재한다면
     //   const ActionMovies = _.filter(state.HomeMovies, genre_ids[i] = 28)
     // }
+
+
+
   },
 })
