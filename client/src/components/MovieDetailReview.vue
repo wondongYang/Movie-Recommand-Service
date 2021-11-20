@@ -3,7 +3,7 @@
     <router-link :to="{name: 'ReviewDetail', params:{reviewId: review.id}}" class="text-decoration-none">
       <div class="d-flex justify-content-between">
       <p>{{ review.content }}</p>
-      <p>{{review.rank}} {{review.user.username}}</p>
+      <p>{{ rank_repr }} {{review.user.username}}</p>
       </div>
     </router-link>
   </div>
@@ -15,6 +15,12 @@ export default {
   props: {
     review: Object,
   },
+  computed: {
+    rank_repr: function () {
+      let stars = ['', '★', '★★', '★★★', '★★★★', '★★★★★']
+      return stars[this.review.rank]
+    }
+  }
 }
 </script>
 

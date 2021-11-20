@@ -7,8 +7,11 @@
       <input id="movie" type="text" :placeholder="movie" class="form-control"> <br>
     </div>
     <div class="mb-3 text-start">
-      <label for="rank" class="form-label me-auto">별점</label>
-      <input id="rank" type="text" v-model.trim="rank" class="form-control"> <br>
+      <label for="rank" class="form-label">별점</label>
+      <p>{{rank_repr}}</p>
+      <input type="range" v-model="rank" class="form-range" min="1" max="5" id="rank"> 
+      <!-- <label for="rank" class="form-label me-auto">별점</label>
+      <input id="rank" type="text" v-model.trim="rank" class="form-control"> <br> -->
     </div>
     <div class="mb-3 text-start">
       <label for="content" class="form-label">내용</label>
@@ -32,15 +35,13 @@ export default {
       // movie: null,
       title: '',
       content: '',
-      rank: '',
+      rank: 3,
       movie: '',
-
     }
   },
   // props: {
   //   movie: Object,
   // },
-
 
   methods: {
     // 왜 setToken을 store에서 쓰면 Promise 객체로 나오는 걸까?
@@ -58,8 +59,6 @@ export default {
         content: this.content,
         rank: this.rank,
       }
-      // console.log(review)
-      // console.log(this.$store.dispatch('setToken').value)
       axios({
         method: 'post',
         url: `${SERVER_URL}/community/create/`,
@@ -76,6 +75,14 @@ export default {
       })
     },
   },
+
+  computed: {
+    rank_repr: function () {
+      let stars = ['', '★', '★★', '★★★', '★★★★', '★★★★★']
+      return stars[this.rank]
+    }
+  },
+
   created: function () {
     this.movie = this.$store.state.selectedMovie
   }
