@@ -11,7 +11,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     login: false,
-    HomeMovies: null,
+    HomeMovies: [],
     seletedMovie: null,
   },
   mutations: {
