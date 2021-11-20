@@ -20,7 +20,7 @@
         <div v-for="(comment, idx) in review.comments" :key="idx">
           <ReviewDetailComments :comment="comment" />
         </div>
-        <ReviewDetailCommentsform :reviewId="reviewId" />
+        <ReviewDetailCommentsform :reviewId="reviewId" @commentAdded="getReview" />
         <!-- {{ review.comment_set }} -->
       </div>
     </div>

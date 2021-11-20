@@ -46,6 +46,7 @@ export default {
           data: comment,
         })
         .then(() => {
+          this.$emit('commentAdded')
           this.commentInput = ''
         })
         .catch(error => {

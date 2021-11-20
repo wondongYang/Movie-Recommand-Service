@@ -1,5 +1,7 @@
 <template>
   <div>
+    <hr>
+    
     {{ comment.user.username }} : {{ comment.content }}
   </div>
 </template>
