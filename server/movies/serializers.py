@@ -9,7 +9,7 @@ class MovieListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Movie
-        fields = ('id', 'title', 'poster_path', 'genre_ids')
+        fields = '__all__'
         depth = 1
 
 
