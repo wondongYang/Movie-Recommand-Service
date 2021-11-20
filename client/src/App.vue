@@ -57,6 +57,12 @@ export default {
 
     // 영화 들고 오기
     this.$store.dispatch('getHomeMovies')
+
+    let homeGenres = ['action', 'drama', 'animation']
+    for (let genre of homeGenres) {
+      console.log(genre)
+      this.$store.dispatch('getGenreMovies', genre)
+    }
   }
 }
 </script>
