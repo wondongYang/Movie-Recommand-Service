@@ -2,6 +2,8 @@
   <div>
     <!-- 최초에 로드되지 않은 movie(null)를 참조할 때 error가 발생하는 것을 막기 위해 v-if를 사용합니다-->
     <div v-if="movie" class="container">
+      <router-link :to="{name: 'Home',}" class="btn btn-secondary me-auto" >뒤로</router-link>
+      <hr>
       <div class="row">
         <div class="col-3">
           <img :src="fullPosterPath" alt="Movie Poster" class="img-fluid">

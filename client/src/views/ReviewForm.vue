@@ -16,8 +16,8 @@
     </div>
     <div class="d-flex justify-content-end">
       <button class="btn btn-primary me-3" @click="createReview">작성</button>
-      <!-- <router-link :to="{name: 'MovieDetail', params:{ movieId:  }}" class="btn btn-secondary" >취소</router-link> -->
-      <router-link :to="{name: 'Home',}" class="btn btn-secondary" >취소</router-link>
+      <router-link :to="{name: 'MovieDetail', params:{ movieId: this.$route.params.movieId }}" class="btn btn-secondary" >취소</router-link>
+      <!-- <router-link :to="{name: 'Home',}" class="btn btn-secondary" >취소</router-link> -->
     </div>
   </div>
 </template>
