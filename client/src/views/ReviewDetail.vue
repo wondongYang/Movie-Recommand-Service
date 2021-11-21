@@ -80,7 +80,7 @@ export default {
         url: `${SERVER_URL}/community/${this.reviewId}/`,
         headers: this.$store.dispatch('setToken'),
       })
-      .then(response => {
+      .then(() => {
         // review를 삭제하고 나면 영화 페이지로 이동
         // this.$router.push({name: 'MovieDetail', params:{ movieId: }})
         

@@ -7,13 +7,13 @@
     <br>
     <div>
       <h3>최근 개봉작</h3>
-      <div v-if="$store.getters.NewMovies" class="d-flex flex-wrap justify-content-evenly p-3">
-        <MovieCard v-for="(movie, idx) in NewMovies" :key="idx" :movie="movie" />
+      <div v-if="latestMovies" class="d-flex flex-wrap justify-content-evenly p-3">
+        <MovieCard v-for="(movie, idx) in latestMovies" :key="idx" :movie="movie" />
       </div>
       <hr>
       <h3>리뷰가 많이 달린 영화</h3>
-      <div v-if="$store.getters.ReviewsMovies" class="d-flex flex-wrap justify-content-evenly p-3">
-        <MovieCard v-for="(movie, idx) in ReviewsMovies" :key="idx" :movie="movie" />
+      <div v-if="largestReviewMovies" class="d-flex flex-wrap justify-content-evenly p-3">
+        <MovieCard v-for="(movie, idx) in largestReviewMovies" :key="idx" :movie="movie" />
       </div>
       <hr>
 
@@ -54,21 +54,7 @@ export default {
     MovieCard,
   },
   computed: {
-    NewMovies: function () {
-      return this.$store.getters.NewMovies
-    },
-    ReviewsMovies: function () {
-      return this.$store.getters.ReviewsMovies
-    },
-    ...mapGetters(['HomeGenreMovies',])
-    // server/movies/views.py 참조
+    ...mapGetters(['latestMovies','largestReviewMovies','HomeGenreMovies',])
   },
-  // beforeCreate: function () {
-  //   // 영화 들고 오기
-  //   this.$store.dispatch('getHomeMovies')
-  // }
-  // created: function () {
-  //   this.$store.dispatch('getHomeMovies')
-  // },
 }
 </script>
