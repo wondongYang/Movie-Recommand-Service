@@ -29,12 +29,13 @@ def movie_recommended(request):
 
 
 # DB에 접근해야 하는 작업은 Vue보다 Django에서 처리하는 것이 맞을 것 같습니다.
-# 예를 들어 영화 장르별 인기 영화 10개를 이렇게 뽑겠습니다.
+# 예를 들어 영화 장르별 인기 영화 10개를 이렇게 뽑겠습니다. 
+# -> vue에서 보여지는 편의성을 위해 3개로 수정했습니다!
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def genre_top_list(request, genre_name):
     genre_id = get_object_or_404(Genre, name=genre_name.title())
-    movies = get_list_or_404(Movie, genre_ids__in=[genre_id])[:10]
+    movies = get_list_or_404(Movie, genre_ids__in=[genre_id])[:3]
     serializer = MovieListSerializer(movies, many=True)
     return Response(serializer.data)
 

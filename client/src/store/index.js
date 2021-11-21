@@ -14,6 +14,7 @@ export default new Vuex.Store({
   state: {
     login: false,
     HomeMovies: [],
+    HomeReviews: [],
     seletedMovie: null,
     HomeGenreMovies: {}
   },
@@ -101,33 +102,28 @@ export default new Vuex.Store({
   modules: {
   },
   getters: {
-    HomeMoviesCut: function (state) {
-      return state.HomeMovies.slice(0, 19)
-    },
+    // HomeMoviesCut: function (state) {
+    //   return state.HomeMovies.slice(0, 19)
+    // },
     NewMovies: function (state) {
-      const today = dayjs().format("YYYY-MM-DD")
+      const sixMonthAgo = dayjs().subtract(6, 'month').format("YYYY-MM-DD")
+      console.log(sixMonthAgo)
       const ReleasedMovies = state.HomeMovies.filter(function(i) {
-        return i.release_date <= today
+        return i.release_date <= sixMonthAgo
       })
       const NewMoviesList = _.orderBy(ReleasedMovies, 'release_date', 'desc').slice(0, 4)
+      console.log(NewMoviesList)
       return NewMoviesList
     },
 
+    ReviewsMovies: function (state) {
+      const LargestReviewMovie = _.orderBy(state.HomeMovies, 'reviews.length', 'desc').slice(0, 4)
+      console.log(LargestReviewMovie)
+      return LargestReviewMovie
+    },
+    
     HomeGenreMovies: function (state) {
       return state.HomeGenreMovies
     },
-
-    // PopularMovies: function (state) {
-      // 리뷰 역추적 > 별점 평균 계산
-    // }
-
-    
-    // ActionMovies: function (state) {
-      // genre_ids안의 리스트 중에 28(action)이 존재한다면
-    //   const ActionMovies = _.filter(state.HomeMovies, genre_ids[i] = 28)
-    // }
-
-
-
   },
 })
