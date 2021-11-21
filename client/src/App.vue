@@ -56,7 +56,9 @@ export default {
     }
 
     // 영화 들고 오기
-    this.$store.dispatch('getHomeMovies')
+    // this.$store.dispatch('getHomeMovies')
+    this.$store.dispatch('getlatestMovies')
+    this.$store.dispatch('getlargestReviewMovies')
 
     // 필요한 장르는 일단 여기다 집어넣으시면 됩니다. (Home 부분도 연동되게 하면 좋을듯...!)
     let homeGenres = ['action', 'drama', 'animation']

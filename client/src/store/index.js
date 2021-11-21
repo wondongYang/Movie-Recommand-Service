@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import _ from 'lodash'
-import dayjs from 'dayjs'
+// import _ from 'lodash'
+// import dayjs from 'dayjs'
 
 // const TMDB_API = process.env.VUE_APP_TMDB_API_KEY
 // const TMDB_BASEURL = 'https://api.themoviedb.org/3/movie/'
@@ -13,8 +13,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     login: false,
-    HomeMovies: [],
-    HomeReviews: [],
+    latestMovies: [],
+    largestReviewMovies: [],
+    // HomeMovies: [],
+    // HomeReviews: [],
     seletedMovie: null,
     HomeGenreMovies: {}
   },
@@ -28,8 +30,11 @@ export default new Vuex.Store({
     },
 
     // Movies
-    SAVE_HOME_MOVIES: function (state, movies) {
-      state.HomeMovies = movies
+    SAVE_LATEST_MOVIES: function (state, movies) {
+      state.latestMovies = movies
+    },
+    SAVE_LARGEST_REVIEW_MOVIES: function (state, movies) {
+      state.largestReviewMovies = movies
     },
     SELECT_MOVIE: function (state, movie) {
       state.seletedMovie = movie
@@ -58,26 +63,52 @@ export default new Vuex.Store({
     },
 
     // Home.vue에서 보여줄 영화들 긁어오기
-    getHomeMovies: function ({commit}) {
+    // getHomeMovies: function ({commit}) {
+    //   axios({
+    //     method: 'GET',
+    //     // URL 필요에 따라 변경 (Django 서버로, 혹은 TMDB의 top rated, latest, ...)
+    //     // url: TMDB_BASEURL + 'popular',
+    //     url: `${SERVER_URL}/movies/`
+    //     // params: {
+    //     //   api_key: TMDB_API,
+    //     //   language: 'ko-KR',
+    //     // }
+    //   })
+    //   .then(response => {
+    //     commit('SAVE_HOME_MOVIES', response.data)
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //   })
+    // },
+    selectMovie: function ({commit}, movie) {
+      commit('SELECT_MOVIE', movie)
+    },
+
+    // 
+    getlatestMovies: function ({commit}) {
       axios({
-        method: 'GET',
-        // URL 필요에 따라 변경 (Django 서버로, 혹은 TMDB의 top rated, latest, ...)
-        // url: TMDB_BASEURL + 'popular',
-        url: `${SERVER_URL}/movies/`
-        // params: {
-        //   api_key: TMDB_API,
-        //   language: 'ko-KR',
-        // }
+        method: 'get',
+        url: `${SERVER_URL}/movies/latest/`
       })
       .then(response => {
-        commit('SAVE_HOME_MOVIES', response.data)
+          commit('SAVE_LATEST_MOVIES', response.data)
       })
       .catch(error => {
         console.log(error)
       })
     },
-    selectMovie: function ({commit}, movie) {
-      commit('SELECT_MOVIE', movie)
+    getlargestReviewMovies: function ({commit}) {
+      axios({
+        method: 'get',
+        url: `${SERVER_URL}/movies/top_reviews/`
+      })
+      .then(response => {
+          commit('SAVE_LARGEST_REVIEW_MOVIES', response.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
     },
 
     // 장르별 영화 가져오기
@@ -105,21 +136,23 @@ export default new Vuex.Store({
     // HomeMoviesCut: function (state) {
     //   return state.HomeMovies.slice(0, 19)
     // },
-    NewMovies: function (state) {
-      const sixMonthAgo = dayjs().subtract(6, 'month').format("YYYY-MM-DD")
-      console.log(sixMonthAgo)
-      const ReleasedMovies = state.HomeMovies.filter(function(i) {
-        return i.release_date <= sixMonthAgo
-      })
-      const NewMoviesList = _.orderBy(ReleasedMovies, 'release_date', 'desc').slice(0, 4)
-      console.log(NewMoviesList)
-      return NewMoviesList
+    latestMovies: function (state) {
+      return state.latestMovies
+      // const sixMonthAgo = dayjs().subtract(6, 'month').format("YYYY-MM-DD")
+      // console.log(sixMonthAgo)
+      // const ReleasedMovies = state.HomeMovies.filter(function(i) {
+      //   return i.release_date <= sixMonthAgo
+      // })
+      // const NewMoviesList = _.orderBy(ReleasedMovies, 'release_date', 'desc').slice(0, 4)
+      // console.log(NewMoviesList)
+      // return NewMoviesList
     },
 
-    ReviewsMovies: function (state) {
-      const LargestReviewMovie = _.orderBy(state.HomeMovies, 'reviews.length', 'desc').slice(0, 4)
-      console.log(LargestReviewMovie)
-      return LargestReviewMovie
+    largestReviewMovies: function (state) {
+      return state.largestReviewMovies
+      // const LargestReviewMovie = _.orderBy(state.HomeMovies, 'reviews.length', 'desc').slice(0, 4)
+      // console.log(LargestReviewMovie)
+      // return LargestReviewMovie
     },
     
     HomeGenreMovies: function (state) {

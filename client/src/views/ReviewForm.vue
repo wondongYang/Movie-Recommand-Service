@@ -4,7 +4,7 @@
 
     <div class="mb-3 text-start">
       <label for="movie" class="form-label me-auto">영화</label>
-      <input id="movie" type="text" :placeholder="movie" class="form-control"> <br>
+      <input id="movie" type="text" :placeholder="$route.query.movieTitle" class="form-control" disabled> <br>
     </div>
     <div class="mb-3 text-start">
       <label for="rank" class="form-label">별점</label>

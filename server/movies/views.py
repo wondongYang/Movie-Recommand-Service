@@ -1,4 +1,7 @@
+import datetime
+
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.db.models import Count
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
@@ -41,3 +44,24 @@ def genre_top_list(request, genre_name):
 
 # 위처럼 출력 형식에 따라 (리스트를 줄 건지? 무엇을 포함할 것인지? 하나만 줄 건지?) serializer를 선택하되,
 # serializer 안에 들어갈 내용을 바꿔서 집어넣으면 됩니다.
+
+
+
+
+# 각각 몇개 들고 올까요?
+N = 5
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def latest_movie_list(request):
+    # poster_path가 있고 오늘 이전에 개봉하는 영화의 개봉일 내림차순 각각 5개
+    movies = get_list_or_404(Movie.objects.exclude(poster_path=None).order_by('-release_date'), release_date__lte=datetime.date.today())[:N]
+    serializer = MovieListSerializer(movies, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def review_desc_movie_list(request):
+    # Movie에 달린 Review를 세어서 (reviews__count) 갯수 역순으로 5개
+    movies = Movie.objects.annotate(Count('reviews')).order_by('-reviews__count')[:N]
+    serializer = MovieListSerializer(movies, many=True)
+    return Response(serializer.data)

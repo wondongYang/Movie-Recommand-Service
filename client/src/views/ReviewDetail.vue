@@ -52,7 +52,10 @@ export default {
   data: function () {
     return {
       reviewId: Number(this.$route.params.reviewId),
-      review: {},
+      review: {
+        movie: {},
+        user: {},
+      },
     }
   },
   methods: {
@@ -64,7 +67,6 @@ export default {
         headers: this.$store.dispatch('setToken'),
       })
       .then(response => {
-        console.log(response)
         this.review = response.data
       })
       .catch(error => {
@@ -75,11 +77,10 @@ export default {
     deleteReview: function () {
       axios({
         method: 'delete',
-        url: `${SERVER_URL}/community/${this.reviewId}`,
+        url: `${SERVER_URL}/community/${this.reviewId}/`,
         headers: this.$store.dispatch('setToken'),
       })
-      .then(response => {
-        console.log(response)
+      .then(() => {
         // review를 삭제하고 나면 영화 페이지로 이동
         // this.$router.push({name: 'MovieDetail', params:{ movieId: }})
         

@@ -28,7 +28,7 @@
       <div class="d-flex">
 
       <div class="ms-auto" v-if="login">
-        <router-link :to="{name: 'ReviewForm'}" class="btn btn-primary ms-auto" :movie="movie">리뷰 작성하기</router-link>
+        <router-link :to="{name: 'ReviewForm', query: {movieTitle: movie.title}}" class="btn btn-primary ms-auto" :movie="movie">리뷰 작성하기</router-link>
       </div>
       <div class="ms-auto" v-else>
         <router-link :to="{name: 'Login'}" :movie="movie">리뷰를 작성하려면 로그인하세요</router-link>
