@@ -27,6 +27,7 @@
 
 <script>
 import axios from 'axios'
+import { mapActions } from 'vuex'
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
 export default {
   name: 'ReviewForm',
@@ -44,26 +45,18 @@ export default {
   // },
 
   methods: {
-    // 왜 setToken을 store에서 쓰면 Promise 객체로 나오는 걸까?
-    setToken: function () {
-      const token = localStorage.getItem('jwt')
-      const config = {
-        Authorization: `JWT ${token}`,
-      }
-      return config
-    },
-
     createReview: function () {
       const review = {
         movie: this.$route.params.movieId,
         content: this.content,
         rank: this.rank,
       }
+      this.setToken()
       axios({
         method: 'post',
         url: `${SERVER_URL}/community/create/`,
-        // headers: this.$store.dispatch('setToken'),
-        headers: this.setToken(),
+        headers: this.$store.state.tokenStr,
+        // headers: this.setToken(),
         data: review,
       })
       .then(() => {
@@ -74,6 +67,7 @@ export default {
         
       })
     },
+    ...mapActions(['setToken',])
   },
 
   computed: {
