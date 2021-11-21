@@ -1,5 +1,9 @@
 <template>
   <div class="container">
+    <div class="d-flex">
+        <router-link :to="{name: 'MovieDetail', params: {movieId: review.movie.id }}" class="btn btn-secondary me-auto" >뒤로</router-link>
+      </div>
+    <hr>
     <div v-if="review" class="row">
       <div class="col-12 text-start">
       <h3>
@@ -10,23 +14,23 @@
         {{ review.user.username }}
         </span>
       </div>
-      <div class="text-end">
-        <span>
-        {{ review.rank }}
-        </span>
+      <div class="text-start fs-2">
+        {{ rank_repr }} <span class="fs-6">/5</span>
       </div>
-
-      <!--  -->
       <div>
+        <br>
         <p>
           {{ review.content }}
         </p>
+        <p class="text-end">
           {{ review.updated_at }}
+        </p>
       </div>
       <div class="text-end">
         <button class="btn btn-warning m-1">수정</button>
         <button class="btn btn-warning m-1">삭제</button>
       </div>
+      <hr>
       <div>
         <!-- 현재 django에 Review에서 Comment를 불러올 related_name이 없음 -->
         <div v-for="(comment, idx) in review.comments" :key="idx">
@@ -90,7 +94,12 @@ export default {
         console.log(error)
       })
     }
-
+  },
+  computed: {
+    rank_repr: function () {
+          let stars = ['', '★', '★★', '★★★', '★★★★', '★★★★★']
+          return stars[this.review.rank]
+        },
   },
   created: function () {
     this.getReview()

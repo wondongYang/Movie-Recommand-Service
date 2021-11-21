@@ -12,13 +12,13 @@
 
         </div>
         <div class="col-9">
-          <h2 class="text-start">{{ movie.title }}</h2>
+          <h2 class="fs-2 text-start">{{ movie.title }}</h2>
           <p class="text-end">
-          <span v-for="(genre, genreidx) in movie.genres" :key="genreidx" class="text-end">{{ genre.name }} </span>
+          <span v-for="(genre, genreidx) in movie.genre_ids" :key="genreidx" class="text-end">{{ genre.name }} | </span>
           </p>
-          <h5 class="text-end">{{ movie.release_date }}</h5>
+          <p class="text-end fs=4">{{ movie.release_date|releaseDateRepr }}</p>
           <br>
-          <p>{{ movie.overview }}</p>
+          <p class="text-start">{{ movie.overview }}</p>
         </div>
       </div>
       <hr>
@@ -86,6 +86,15 @@ export default {
   },
   mounted: function () {
     this.getMovieDetail(this.movieId)
+  },
+  filters: {
+    releaseDateRepr: function (datestring) {
+      // YYYY-MM-DD >> YYYY년 M월 D일
+      let [year, month, day] = datestring.split('-')
+      month = parseInt(month)
+      day = parseInt(day)
+      return `${year}년 ${month}월 ${day}일`
+    }
   }
   
 }

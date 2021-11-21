@@ -19,8 +19,8 @@ export default {
     rank_repr: function () {
       let stars = ['', '★', '★★', '★★★', '★★★★', '★★★★★']
       return stars[this.review.rank]
-    }
-  }
+    },
+  },
 }
 </script>
 
