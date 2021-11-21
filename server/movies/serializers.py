@@ -7,6 +7,15 @@ from django.contrib.auth import get_user_model
 
 class MovieListSerializer(serializers.ModelSerializer):
 
+    class ReviewSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = Review
+            fields = ('id', 'rank', 'user')
+    
+    reviews = ReviewSerializer(many=True, read_only=True)
+    review_count = serializers.IntegerField(source='reviews.count', read_only=True)
+
     class Meta:
         model = Movie
         fields = '__all__'

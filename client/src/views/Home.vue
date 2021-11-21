@@ -15,15 +15,15 @@
         <MovieCard v-for="(movie, idx) in NewMovies" :key="idx" :movie="movie" />
       </div>
       <hr>
-      <h3>인기 영화</h3>
-      <!-- <div v-if="$store.getters.PopularMovies" class="d-flex flex-wrap justify-content-evenly p-3">
-        <MovieCard v-for="(movie, idx) in PopularMovies" :key="idx" :movie="movie" />
-      </div> -->
+      <h3>리뷰가 많이 달린 영화</h3>
+      <div v-if="$store.getters.ReviewsMovies" class="d-flex flex-wrap justify-content-evenly p-3">
+        <MovieCard v-for="(movie, idx) in ReviewsMovies" :key="idx" :movie="movie" />
+      </div>
       <hr>
       <h3>장르별 영화</h3>
       <p>액션</p>
-      <!-- <div v-if="$store.getters.PopularMovies" class="d-flex flex-wrap justify-content-evenly p-3">
-        <MovieCard v-for="(movie, idx) in PopularMovies" :key="idx" :movie="movie" />
+      <!-- <div v-if="$store.getters.ActionMovies" class="d-flex flex-wrap justify-content-evenly p-3">
+        <MovieCard v-for="(movie, idx) in ActionMovies" :key="idx" :movie="movie" />
       </div> -->
     </div>
 
@@ -47,9 +47,9 @@ export default {
     NewMovies: function () {
       return this.$store.getters.NewMovies
     },
-    // PopularMovies: function () {
-    //   return this.$store.getters.PopularMovies
-    // },
+    ReviewsMovies: function () {
+      return this.$store.getters.ReviewsMovies
+    },
     // ActionMovies: function () {
     //   return this.$store.getters.ActionMovies
     // },
