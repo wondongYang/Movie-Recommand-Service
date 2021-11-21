@@ -5,7 +5,7 @@
     <div class="card-body">
       <h3>{{movie.title}}</h3>
       <span v-for="(genre, id) in movie.genre_ids" :key="id">#{{genre.name}} </span>
-      <p>{{movie.overview}}</p>
+      <!-- <p>{{movie.overview}}</p> -->
     </div>
     </router-link>
   </div>

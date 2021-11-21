@@ -1,8 +1,9 @@
 <template>
   <div>
-    <hr>
-    
-    {{ comment.user.username }} : {{ comment.content }}
+    <p>
+    {{ comment.user.username }} <br>
+    {{ comment.content }}
+    </p>
   </div>
 </template>
 

@@ -16,6 +16,7 @@ export default new Vuex.Store({
     HomeMovies: [],
     HomeReviews: [],
     seletedMovie: null,
+    HomeGenreMovies: {}
   },
   mutations: {
     // Auth
@@ -33,6 +34,11 @@ export default new Vuex.Store({
     SELECT_MOVIE: function (state, movie) {
       state.seletedMovie = movie
     },
+    SAVE_GENRE_MOVIE_LIST: function (state, payload) {
+      if (payload.data) {
+        state.HomeGenreMovies[payload.genreName] = payload.data
+      }
+    }
   },
   actions: {
     // Auth
@@ -72,6 +78,24 @@ export default new Vuex.Store({
     },
     selectMovie: function ({commit}, movie) {
       commit('SELECT_MOVIE', movie)
+    },
+
+    // 장르별 영화 가져오기
+    getGenreMovies: function ({commit}, genre_name) {
+      axios({
+        method: 'get',
+        url: `${SERVER_URL}/movies/top/${genre_name}/`
+      })
+      .then(response => {
+        const payload = {
+          genreName: genre_name,
+          data: response.data
+        }
+        commit('SAVE_GENRE_MOVIE_LIST', payload)
+      })
+      .catch(error => {
+        console.log(error)
+      })
     }
     
   },
@@ -96,11 +120,10 @@ export default new Vuex.Store({
       const LargestReviewMovie = _.orderBy(state.HomeMovies, 'reviews.length', 'desc').slice(0, 4)
       console.log(LargestReviewMovie)
       return LargestReviewMovie
-    }
-
-    // ActionMovies: function (state) {
-      // genre_ids안의 리스트 중에 28(action)이 존재한다면
-    //   const ActionMovies = _.filter(state.HomeMovies, genre_ids[i] = 28)
-    // }
+    },
+    
+    HomeGenreMovies: function (state) {
+      return state.HomeGenreMovies
+    },
   },
 })
