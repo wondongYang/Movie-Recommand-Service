@@ -6,10 +6,6 @@
     </div>
     <br>
     <div>
-      <!-- <h3>인기 영화들</h3>
-      <div v-if="$store.getters.NewMovies" class="d-flex flex-wrap justify-content-evenly p-3">
-        <MovieCard v-for="(movie, idx) in NewMovies" :key="idx" :movie="movie" />
-      </div> -->
       <h3>최근 개봉작</h3>
       <div v-if="$store.getters.NewMovies" class="d-flex flex-wrap justify-content-evenly p-3">
         <MovieCard v-for="(movie, idx) in NewMovies" :key="idx" :movie="movie" />
@@ -42,13 +38,6 @@
           </div>
         </div>
       </div>
-
-
-
-
-      <!-- <div v-if="$store.getters.PopularMovies" class="d-flex flex-wrap justify-content-evenly p-3">
-        <MovieCard v-for="(movie, idx) in PopularMovies" :key="idx" :movie="movie" />
-      </div> -->
     </div>
 
   </div>
@@ -65,9 +54,6 @@ export default {
     MovieCard,
   },
   computed: {
-    // HomeMoviesCut: function () {
-    //   return this.$store.getters.HomeMoviesCut
-    // },
     NewMovies: function () {
       return this.$store.getters.NewMovies
     },
