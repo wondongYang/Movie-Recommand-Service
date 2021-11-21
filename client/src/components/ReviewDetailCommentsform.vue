@@ -1,10 +1,8 @@
 <template>
-  <div class="row">
-    <div class="col-10">
+  <div class="row row-cols-lg-auto g-3 align-items-center">
+    <div class="col-12">
       <input v-model="commentInput" @keypress.enter="addComment" type="text" name="content" class="form-control">
-    </div>
-    <div class="col-2">
-      <button @click="addComment" class="btn btn-primary me-3">작성</button>
+      <button @click="addComment" class="btn btn-primary">작성</button>
     </div>
   </div>
 </template>
