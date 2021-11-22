@@ -7,7 +7,7 @@
         </router-link>
         <!-- <router-link :to="{name: 'Home'}">Home</router-link> -->
         <div v-if="login">
-          <router-link to="#" class="ms-3">{{ username }}</router-link>
+          <router-link :to="{name: 'Profile', params:{username: username}}" class="ms-3">{{ username }}</router-link>
           <router-link :to="{name: 'Recommend'}" class="ms-3">Recommendation</router-link>
           <router-link to="#" @click.native="logout" class="ms-3">Logout</router-link>
         </div>
