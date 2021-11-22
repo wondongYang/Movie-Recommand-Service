@@ -7,10 +7,10 @@
       </div>
       <div>
         <div v-if="like">
-          <button @click="LikeMovie">좋아요</button>
+          <button @click="toggleLike">좋아요</button>
         </div>
         <div v-else>
-          <button @click="LikeMovie">좋아요 취소</button>
+          <button @click="toggleLike">좋아요 취소</button>
         </div>
       </div>
       <hr>
@@ -48,6 +48,7 @@
 
 <script>
 import axios from 'axios'
+import { mapActions } from 'vuex'
 import MovieDetailReview from '@/components/MovieDetailReview'
 // const TMDB_BASEURL = 'https://api.themoviedb.org/3/movie/'
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
@@ -84,26 +85,27 @@ export default {
       })
     },
     LikeMovie: function (movieId) {
+      const like = {
+        movie: this.$route.params.movieId,
+        like: this.like,
+      }
+      this.setToken()
       axios({
         method: 'POST',
-        // url: TMDB_BASEURL + movieId,
         url: `${SERVER_URL}/movies/${movieId}/likes`,
-        // params: {
-        //   api_key: TMDB_API,
-        //   language: 'ko-KR'
-        // }
+        headers: this.$store.state.tokenStr,
+        data: like,     
       })
-      .then(response => {
-        console.log(response)
-        this.like = response.data
-        this.$store.dispatch('likeMovie', this.like)
+      .then(() => {
+        console.log(this)
+        this.like = !this.like
       })
     }, 
     toggleLike: function () {
-      console.log(this.like)
       console.log(this)
       this.like = !this.like
-    }
+    },
+    ...mapActions(['setToken',])
   },
   computed: {
     fullPosterPath: function () {
