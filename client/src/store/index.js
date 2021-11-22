@@ -31,6 +31,7 @@ export default new Vuex.Store({
     },
     SET_LOGOUT: function (state) {
       state.login = false
+      state.username = 'AnonymousUser'
     },
     SET_TOKEN: function (state, config) {
       state.tokenStr = config
