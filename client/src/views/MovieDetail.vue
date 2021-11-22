@@ -66,12 +66,18 @@ export default {
       // like: this.movie.like_users,
       like: null,
       count: null,
+      username: null,
     }
   },
   props: {
     // movieId: Number,
   },
   methods: {
+    isUsername(element) {
+      if(element.username === this.username) {
+        return true
+      }
+    },
     getMovieDetail: function (movieId) {
       axios({
         method: 'GET',
@@ -85,19 +91,15 @@ export default {
       .then(response => {
         this.movie = response.data
         this.count = this.movie.like_users.length
+        this.username = this.$store.state.username
+        this.like = this.movie.like_users.some((element) => {
+          if(element.username === this.username) {
+            return true
+          }
+        })
         this.$store.dispatch('selectMovie', this.movie)
       })
     },
-    // getLikeMovie: function () {
-    //   axios({
-    //     method: 'GET',
-    //     url: `${SERVER_URL}/movies/${movieId}/likes/`,
-    //   })
-    //   .then(response => {
-    //     this.movie = response.data
-    //     this.$store.dispatch('selectMovie', this.movie)
-    //   })
-    // },
     LikeMovie: function (movieId) {
       const like = {
         movie: this.$route.params.movieId,
@@ -112,7 +114,7 @@ export default {
       })
       .then((response) => {
         console.log(this.movie.like_users)
-        console.log(response)
+        console.log(this.username)
         this.like = !this.like
         this.count = response.data.count
       })

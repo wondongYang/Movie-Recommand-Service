@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import AllowAny, IsAuthenticated
 import jwt
-
+from django.http.response import JsonResponse
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -96,6 +96,28 @@ def review_detail(request, review_pk):
         return review_update()
     else:
         return review_delete()
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def review_likes(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+
+    if review.like_users.filter(pk=request.user.pk).exists():
+        # 좋아요 취소
+        review.like_users.remove(request.user)
+        liked = False
+    else:
+        # 좋아요 누름
+        review.like_users.add(request.user)
+        liked = True
+    
+    like_status = {
+        'liked': liked,
+        'count': review.like_users.count(),
+    }
+    return JsonResponse(like_status)
+
 
 @api_view(['POST'])
 def comment_create(request, review_pk):
