@@ -2,8 +2,9 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
-from .serializers import UserSerializer
-
+from .serializers import UserSerializer, UserProfileSerializer
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -27,3 +28,10 @@ def signup(request):
         user.save()
     # password는 직렬화 과정에는 포함 되지만 → 표현(response)할 때는 나타나지 않는다.
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def profile(request, username):
+    person = get_object_or_404(get_user_model(), username=username)
+    serializer = UserProfileSerializer(person)
+    return Response(serializer.data, status=status.HTTP_200_OK)

@@ -5,7 +5,7 @@
       <div class="d-flex">
         <router-link :to="{name: 'Home',}" class="btn btn-secondary me-auto" >뒤로</router-link>
       </div>
-      <div>
+      <div v-if="login">
         <p>좋아요 수: {{ count }}</p>
         <div v-if="like">
           <button @click="LikeMovie(movieId)">좋아요 취소</button>

@@ -4,6 +4,9 @@
       <p> 메인 화면이 들어갈 공간입니다. (Carousel이나 Wallpaper 등...)</p>
       <p> Soy Source </p>
     </div>
+    <!-- <div>
+      <HomeCarousel />
+    </div> -->
     <br>
     <div>
       <h3>최근 개봉작</h3>
@@ -47,11 +50,13 @@
 // @ is an alias to /src
 // import {mapActions} from 'vuex'
 import MovieCard from '@/components/MovieCard'
+// import HomeCarousel from '@/components/HomeCarousel'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   components: {
     MovieCard,
+    // HomeCarousel,
   },
   computed: {
     ...mapGetters(['latestMovies','largestReviewMovies','HomeGenreMovies',])
