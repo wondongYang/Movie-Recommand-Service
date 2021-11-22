@@ -18,7 +18,8 @@
       <textarea id="content" v-model="content" cols="30" rows="10" class="form-control"></textarea> <br>
     </div>
     <div class="d-flex justify-content-end">
-      <button class="btn btn-primary me-3" @click="createReview">작성</button>
+      <button v-if="isUpdate" class="btn btn-primary me-3" @click="updateReview">수정</button>
+      <button v-else class="btn btn-primary me-3" @click="createReview">작성</button>
       <router-link :to="{name: 'MovieDetail', params:{ movieId: this.$route.params.movieId }}" class="btn btn-secondary" >취소</router-link>
       <!-- <router-link :to="{name: 'Home',}" class="btn btn-secondary" >취소</router-link> -->
     </div>
@@ -34,10 +35,11 @@ export default {
   data: function () {
     return {
       // movie: null,
-      title: '',
       content: '',
       rank: 3,
       movie: '',
+      isUpdate: !!this.$route.params.reviewId,
+      reviewId: this.$route.params.reviewId,
     }
   },
   // props: {
@@ -64,9 +66,30 @@ export default {
       })
       .catch(error => {
         console.log(error)
-        
       })
     },
+    updateReview: function () {
+      const review = {
+        movie: this.$route.params.movieId,
+        content: this.content,
+        rank: this.rank,
+      }
+      this.setToken()
+      axios({
+        method: 'put',
+        url: `${SERVER_URL}/community/${this.$route.params.reviewId}/`,
+        headers: this.$store.state.tokenStr,
+        // headers: this.setToken(),
+        data: review,
+      })
+      .then(() => {
+        this.$router.push({name: 'MovieDetail', params: {'movieId': this.$route.params.movieId}})
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    },
+
     ...mapActions(['setToken',])
   },
 
@@ -79,6 +102,19 @@ export default {
 
   created: function () {
     this.movie = this.$store.state.selectedMovie
+    if (this.isUpdate) {
+      axios({
+        method: 'get',
+        url: `${SERVER_URL}/community/${this.$route.params.reviewId}/`,
+      })
+      .then(response => {
+        this.content = response.data.content
+        this.rank = response.data.rank
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
   }
 }
 </script>

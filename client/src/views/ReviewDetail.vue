@@ -2,7 +2,7 @@
   <div class="container">
     <div v-if="review">
       <div class="d-flex">
-        <router-link :to="{name: 'MovieDetail', params: {movieId: review.movie.id }}" class="btn btn-secondary me-auto" >뒤로</router-link>
+        <router-link :to="{name: 'MovieDetail', params: {'movieId': review.movie.id }}" class="btn btn-secondary me-auto" >뒤로</router-link>
       </div>
       <hr>
       <div class="row">
@@ -20,7 +20,9 @@
             <p class="text-end">{{ review.updated_at }}</p>
           </div>
           <div v-if="username === review.user.username" class="text-end">
-            <button class="btn btn-warning m-1">수정</button>
+            <router-link :to="{name: 'UpdateReviewForm', params:{reviewId: review.id, movieId: review.movie.id}}">
+              <button class="btn btn-warning m-1">수정</button>
+            </router-link>
             <button class="btn btn-warning m-1" @click="deleteReview">삭제</button>
           </div>
         </div>
@@ -94,7 +96,7 @@ export default {
       })
       .then(() => {
         // review를 삭제하고 나면 영화 페이지로 이동
-        this.$router.push({name: 'MovieDetail', params: {movieId: this.review.movie.id }})
+        this.$router.push({name: 'MovieDetail', params: {'movieId': this.review.movie.id }})
       })
       .catch(error => {
         console.log(error)
