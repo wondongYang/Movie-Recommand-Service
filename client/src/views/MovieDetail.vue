@@ -5,7 +5,7 @@
       <div class="d-flex">
         <router-link :to="{name: 'Home',}" class="btn btn-secondary me-auto" >뒤로</router-link>
       </div>
-      <div>
+      <div v-if="login">
         <div v-if="like">
           <button @click="toggleLike">좋아요</button>
         </div>

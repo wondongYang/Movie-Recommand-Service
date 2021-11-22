@@ -15,7 +15,6 @@ def review_create(request):
     # if request.user.is_authenticated:
     serializer = ReviewSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        print(request.data)
         movie = get_object_or_404(Movie, pk=request.data.get('movie'))
         serializer.save(user=request.user, movie=movie)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -80,14 +79,10 @@ def review_detail(request, review_pk):
     
     @permission_classes([IsAuthenticated])
     def review_delete():
-        print(request.headers)
         if request.user == review.user:
             review.delete()
             return Response({'id': review_pk}, status=status.HTTP_204_NO_CONTENT)
         else:
-            print(request)
-            print(request.user)
-            print(review.user)
             return Response({'error': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
 
     if request.method == 'GET':
