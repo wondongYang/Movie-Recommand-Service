@@ -1,8 +1,12 @@
 <template>
   <div>
     <p>This is Recommend.</p>
-    <button @click="SelectMyGenre">보고 싶은 장르 선택하기</button>
+    <div class="container">
+      <h2>보고 싶은 장르 선택하기</h2>
+      <!-- <button @click="SelectMyGenre">{{  }}</button> -->
+    </div>
 
+    
     <div v-if="HomeGenreMovies.animation" class="d-flex flex-wrap justify-content-evenly p-3">
       <MovieCard v-for="(movie, idx) in HomeGenreMovies.animation" :key="idx" :movie="movie" />
     </div>
@@ -24,10 +28,10 @@ export default {
     // },
     SelectMyGenre: function () {
       console.log(this)
+    },
   },
   computed: {
     ...mapGetters(['HomeGenreMovies',])
-  },
   }
 }
 </script>

@@ -18,6 +18,7 @@ export default new Vuex.Store({
     // HomeMovies: [],
     // HomeReviews: [],
     seletedMovie: null,
+    likedMovie: false,
     HomeGenreMovies: {}
   },
   mutations: {
@@ -39,11 +40,14 @@ export default new Vuex.Store({
     SELECT_MOVIE: function (state, movie) {
       state.seletedMovie = movie
     },
+    LIKE_MOVIE: function (state, movie) {
+      state.likedMovie = movie
+    },
     SAVE_GENRE_MOVIE_LIST: function (state, payload) {
       if (payload.data) {
         state.HomeGenreMovies[payload.genreName] = payload.data
       }
-    }
+    },
   },
   actions: {
     // Auth
@@ -84,7 +88,9 @@ export default new Vuex.Store({
     selectMovie: function ({commit}, movie) {
       commit('SELECT_MOVIE', movie)
     },
-
+    likedMovie: function ({commit}, movie) {
+      commit('LIKE_MOVIE', movie)
+    },
     // 
     getlatestMovies: function ({commit}) {
       axios({
