@@ -5,7 +5,7 @@ import jwt
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from .models import Review
+from .models import Comment, Review
 from movies.models import Movie
 from .serializers import CommentSerializer, ReviewSerializer
 
@@ -108,11 +108,14 @@ def comment_create(request, review_pk):
     # else:
     #     return Response({'error': '로그인을 해주세요.'}, status=status.HTTP_401_UNAUTHORIZED) 
 
-@api_view(['DELETE'])
-def comment_delete(request, comment_pk):
-    comment = get_object_or_404(Review, pk=comment_pk)
-    if request.user == comment.user:
-        comment.delete()
-        return Response({ 'id': comment_pk })
+@api_view(['DELETE',])
+def comment_delete(request, review_pk, comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    if request.method == 'DELETE':
+        if request.user == comment.user:
+            comment.delete()
+            return Response({'id': comment_pk}, status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response({'error': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
     else:
-        return Response({'error': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
+        return Response({'error': '잘못된 요청입니다.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

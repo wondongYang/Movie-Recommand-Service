@@ -28,7 +28,7 @@
       <div v-if="review">
         <!-- 현재 django에 Review에서 Comment를 불러올 related_name이 없음 -->
         <div v-for="(comment, idx) in review.comments" :key="idx">
-          <ReviewDetailComments :comment="comment" />
+          <ReviewDetailComments :comment="comment" @commentDeleted="getReview" />
         </div>
         <ReviewDetailCommentsform :reviewId="reviewId" @commentAdded="getReview" />
         <!-- {{ review.comment_set }} -->
