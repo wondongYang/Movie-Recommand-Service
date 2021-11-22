@@ -46,6 +46,11 @@ const routes = [
     name: 'ReviewDetail',
     component: ReviewDetail
   },
+  {
+    path: '/movies/:movieId/reviewform/:reviewId',
+    name: 'UpdateReviewForm',
+    component: ReviewForm
+  },
   
 ]
 
