@@ -13,6 +13,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     login: false,
+    username: 'AnonymousUser',
     tokenStr: {},
     latestMovies: [],
     largestReviewMovies: [],
@@ -23,8 +24,9 @@ export default new Vuex.Store({
   },
   mutations: {
     // Auth
-    SET_LOGIN: function (state) {
+    SET_LOGIN: function (state, username) {
       state.login = true
+      state.username = username
     },
     SET_LOGOUT: function (state) {
       state.login = false
@@ -59,8 +61,8 @@ export default new Vuex.Store({
       }
       commit('SET_TOKEN', config)
     },
-    setLogin: function ({commit}) {
-      commit('SET_LOGIN')
+    setLogin: function ({commit}, username) {
+      commit('SET_LOGIN', username)
     },
     setLogout: function ({commit}) {
       commit('SET_LOGOUT')
