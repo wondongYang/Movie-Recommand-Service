@@ -7,10 +7,10 @@
       </div>
       <div>
         <div v-if="like">
-          <button @click="toggleLike">좋아요</button>
+          <button @click="LikeMovie">좋아요</button>
         </div>
         <div v-else>
-          <button @click="toggleLike">좋아요 취소</button>
+          <button @click="LikeMovie">좋아요 취소</button>
         </div>
       </div>
       <hr>
@@ -94,12 +94,14 @@ export default {
         // }
       })
       .then(response => {
-        this.movie = response.data
-        this.$store.dispatch('likedMovie', this.like)
+        console.log(response)
+        this.like = response.data
+        this.$store.dispatch('likeMovie', this.like)
       })
     }, 
     toggleLike: function () {
       console.log(this.like)
+      console.log(this)
       this.like = !this.like
     }
   },

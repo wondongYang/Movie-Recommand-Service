@@ -20,7 +20,7 @@ export default new Vuex.Store({
     // HomeMovies: [],
     // HomeReviews: [],
     seletedMovie: null,
-    likedMovie: false,
+    likedMovie: null,
     HomeGenreMovies: {}
   },
   mutations: {
@@ -46,8 +46,8 @@ export default new Vuex.Store({
     SELECT_MOVIE: function (state, movie) {
       state.seletedMovie = movie
     },
-    LIKE_MOVIE: function (state, movie) {
-      state.likedMovie = movie
+    LIKE_MOVIE: function (state, like) {
+      state.likedMovie = like
     },
     SAVE_GENRE_MOVIE_LIST: function (state, payload) {
       if (payload.data) {
