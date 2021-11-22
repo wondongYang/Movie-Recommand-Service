@@ -6,11 +6,12 @@
         <router-link :to="{name: 'Home',}" class="btn btn-secondary me-auto" >뒤로</router-link>
       </div>
       <div v-if="login">
+        <p>좋아요 수: {{ count }}</p>
         <div v-if="like">
-          <button @click="toggleLike">좋아요</button>
+          <button @click="LikeMovie(movieId)">좋아요 취소</button>
         </div>
         <div v-else>
-          <button @click="toggleLike">좋아요 취소</button>
+          <button @click="LikeMovie(movieId)">좋아요</button>
         </div>
       </div>
       <hr>
@@ -62,18 +63,26 @@ export default {
     return {
       movieId: this.$route.params.movieId,
       movie: null,
-      like: true,
+      // like: this.movie.like_users,
+      like: null,
+      count: null,
+      username: null,
     }
   },
   props: {
     // movieId: Number,
   },
   methods: {
+    isUsername(element) {
+      if(element.username === this.username) {
+        return true
+      }
+    },
     getMovieDetail: function (movieId) {
       axios({
         method: 'GET',
         // url: TMDB_BASEURL + movieId,
-        url: `${SERVER_URL}/movies/${movieId}`,
+        url: `${SERVER_URL}/movies/${movieId}/`,
         // params: {
         //   api_key: TMDB_API,
         //   language: 'ko-KR'
@@ -81,6 +90,13 @@ export default {
       })
       .then(response => {
         this.movie = response.data
+        this.count = this.movie.like_users.length
+        this.username = this.$store.state.username
+        this.like = this.movie.like_users.some((element) => {
+          if(element.username === this.username) {
+            return true
+          }
+        })
         this.$store.dispatch('selectMovie', this.movie)
       })
     },
@@ -92,19 +108,17 @@ export default {
       this.setToken()
       axios({
         method: 'POST',
-        url: `${SERVER_URL}/movies/${movieId}/likes`,
+        url: `${SERVER_URL}/movies/${movieId}/likes/`,
         headers: this.$store.state.tokenStr,
         data: like,     
       })
-      .then(() => {
-        console.log(this)
+      .then((response) => {
+        console.log(this.movie.like_users)
+        console.log(this.username)
         this.like = !this.like
+        this.count = response.data.count
       })
     }, 
-    toggleLike: function () {
-      console.log(this)
-      this.like = !this.like
-    },
     ...mapActions(['setToken',])
   },
   computed: {

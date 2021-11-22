@@ -4,6 +4,15 @@
       <div class="d-flex">
         <router-link :to="{name: 'MovieDetail', params: {'movieId': review.movie.id }}" class="btn btn-secondary me-auto" >뒤로</router-link>
       </div>
+      <div>
+        <p>좋아요 수: {{ count }}</p>
+        <div v-if="like">
+          <button @click="LikeReview(reviewId)">좋아요 취소</button>
+        </div>
+        <div v-else>
+          <button @click="LikeReview(reviewId)">좋아요</button>
+        </div>
+      </div>
       <hr>
       <div class="row">
         <div class="col-12 text-start">
@@ -60,6 +69,8 @@ export default {
         movie: {},
         user: {},
       },
+      like: null,
+      count: null,
     }
   },
   methods: {
@@ -81,11 +92,36 @@ export default {
       })
       .then(response => {
         this.review = response.data
+        this.count = this.review.like_users.length
+        this.like = this.review.like_users.some((element) => {
+          if(element === this.review.user.id) {
+            return true
+          }
+        })
       })
       .catch(error => {
         console.log(error)
       })
     },
+    LikeReview: function (reviewId) {
+      const like = {
+        review: Number(this.$route.params.reviewId),
+        like: this.like,
+      }
+      this.setToken()
+      axios({
+        method: 'POST',
+        url: `${SERVER_URL}/community/${reviewId}/likes/`,
+        headers: this.$store.state.tokenStr,
+        data: like,     
+      })
+      .then((response) => {
+        console.log(this.review.like_users)
+        console.log(this.review.user)
+        this.like = !this.like
+        this.count = response.data.count
+      })
+    }, 
 
     deleteReview: function () {
       this.setToken()
