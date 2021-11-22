@@ -57,10 +57,8 @@ export default {
     // 로그인 체크
     const token = localStorage.getItem('jwt')
     if (token) {
-      console.log(DJANGO_SKEY)
       const userinfo = jwt.verify(token, String(DJANGO_SKEY))
       this.$store.dispatch('setLogin', userinfo.username)
-      // this.login = true
     }
 
     // 영화 들고 오기
