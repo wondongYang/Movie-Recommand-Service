@@ -9,6 +9,7 @@
 
 <script>
 import axios from 'axios'
+import { mapActions } from 'vuex'
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
@@ -22,25 +23,17 @@ export default {
     }
   },
   methods: {
-    setToken: function () {
-      const token = localStorage.getItem('jwt')
-      const config = {
-        Authorization: `JWT ${token}`,
-      }
-      return config
-    },
-
     addComment: function () {
-
       if (this.commentInput != '') {
         const comment = {
           content: this.commentInput,
         }
+        this.setToken()
         axios({
           method: 'post',
           url: `${SERVER_URL}/community/${this.reviewId}/comments/create/`,
-          headers: this.setToken(),
-          // headers: this.$store.dispatch('setToken'),
+          // headers: this.setToken(),
+          headers: this.$store.state.tokenStr,
           data: comment,
         })
         .then(() => {
@@ -51,7 +44,8 @@ export default {
           console.log(error)
         })
       }
-    }
+    },
+    ...mapActions(['setToken',])
   },
 }
 </script>
