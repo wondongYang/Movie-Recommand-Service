@@ -1,5 +1,6 @@
 import datetime
 
+from django.http.response import JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.db.models import Count
 from rest_framework.permissions import AllowAny
@@ -24,7 +25,7 @@ N = 4
 @permission_classes([AllowAny])
 def latest_movie_list(request):
     # poster_path가 있고 오늘 이전에 개봉하는 영화의 개봉일 내림차순 각각 5개
-    movies = get_list_or_404(Movie.objects.exclude(poster_path=None).order_by('-release_date'), release_date__lte=datetime.date.today())[:N]
+    movies = get_list_or_404(Movie.objects.exclude(poster_path=None).exclude(overview='').order_by('-release_date'), release_date__lte=datetime.date.today())[:N]
     serializer = MovieListSerializer(movies, many=True)
     return Response(serializer.data)
 
@@ -56,6 +57,26 @@ def movie_detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def movie_likes(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+
+    if movie.like_users.filter(pk=request.user.pk).exists():
+        # 좋아요 취소
+        movie.like_users.remove(request.user)
+        liked = False
+    else:
+        # 좋아요 누름
+        movie.like_users.add(request.user)
+        liked = True
+    
+    like_status = {
+        'liked': liked,
+        'count': movie.like_users.count(),
+    }
+    return JsonResponse(like_status)
 
 @permission_classes([AllowAny])
 @api_view(['GET'])

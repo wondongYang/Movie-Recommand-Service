@@ -5,6 +5,14 @@
       <div class="d-flex">
         <router-link :to="{name: 'Home',}" class="btn btn-secondary me-auto" >뒤로</router-link>
       </div>
+      <div>
+        <div v-if="like">
+          <button @click="LikeMovie">좋아요</button>
+        </div>
+        <div v-else>
+          <button @click="LikeMovie">좋아요 취소</button>
+        </div>
+      </div>
       <hr>
       <div class="row">
         <div class="col-3">
@@ -52,7 +60,8 @@ export default {
   data: function () {
     return {
       movieId: this.$route.params.movieId,
-      movie: null
+      movie: null,
+      like: true,
     }
   },
   props: {
@@ -73,6 +82,27 @@ export default {
         this.movie = response.data
         this.$store.dispatch('selectMovie', this.movie)
       })
+    },
+    LikeMovie: function (movieId) {
+      axios({
+        method: 'POST',
+        // url: TMDB_BASEURL + movieId,
+        url: `${SERVER_URL}/movies/${movieId}/likes`,
+        // params: {
+        //   api_key: TMDB_API,
+        //   language: 'ko-KR'
+        // }
+      })
+      .then(response => {
+        console.log(response)
+        this.like = response.data
+        this.$store.dispatch('likeMovie', this.like)
+      })
+    }, 
+    toggleLike: function () {
+      console.log(this.like)
+      console.log(this)
+      this.like = !this.like
     }
   },
   computed: {
