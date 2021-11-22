@@ -19,7 +19,7 @@
             <p>{{ review.content }}</p>
             <p class="text-end">{{ review.updated_at }}</p>
           </div>
-          <div class="text-end">
+          <div v-if="username === review.user.username" class="text-end">
             <button class="btn btn-warning m-1">수정</button>
             <button class="btn btn-warning m-1" @click="deleteReview">삭제</button>
           </div>
@@ -29,6 +29,7 @@
         <!-- 현재 django에 Review에서 Comment를 불러올 related_name이 없음 -->
         <div v-for="(comment, idx) in review.comments" :key="idx">
           <ReviewDetailComments :comment="comment" @commentDeleted="getReview" />
+          <br>
         </div>
         <ReviewDetailCommentsform :reviewId="reviewId" @commentAdded="getReview" />
         <!-- {{ review.comment_set }} -->
@@ -103,9 +104,12 @@ export default {
   },
   computed: {
     rank_repr: function () {
-          let stars = ['', '★', '★★', '★★★', '★★★★', '★★★★★']
-          return stars[this.review.rank]
-        },
+      let stars = ['', '★', '★★', '★★★', '★★★★', '★★★★★']
+      return stars[this.review.rank]
+    },
+    username: function () {
+      return this.$store.state.username
+    },
   },
   created: function () {
     this.getReview()
