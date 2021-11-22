@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <p>
+  <div class="text-start">
     {{ comment.user.username }} <br>
     {{ comment.content }}
-    <button v-if="username === comment.user.username" @click="deleteComment">삭제</button>
-    </p>
+    <span class="ms-auto" >
+    <button v-if="username === comment.user.username" @click="deleteComment" class="btn btn-light btn-sm">❌</button>
+    </span>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
         headers: this.$store.state.tokenStr,
       })
       .then(() => {
-        // Comment 삭제 후 reload
+        // Comment 삭제 후 reload >> ReviewDetail로
         this.$emit('commentDeleted')
       })
       .catch(error => {
