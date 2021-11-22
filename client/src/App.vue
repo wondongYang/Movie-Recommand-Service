@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import jwt from 'jsonwebtoken'
+const DJANGO_SKEY = process.env.VUE_APP_DJANGO_SKEY
 export default {
   name: 'App',
   data: function () {
@@ -55,7 +57,9 @@ export default {
     // 로그인 체크
     const token = localStorage.getItem('jwt')
     if (token) {
-      this.$store.state.login = true
+      console.log(DJANGO_SKEY)
+      const userinfo = jwt.verify(token, String(DJANGO_SKEY))
+      this.$store.dispatch('setLogin', userinfo.username)
       // this.login = true
     }
 
