@@ -48,13 +48,13 @@
     </div>
     <div class="carousel-inner">
       <!-- 시작부분만 active를 설정 -->
-      <!-- 이부분에 idx = 0을 주고 1부터 돌리게 하면 될거같음 -->
       <div class="carousel-item active">
-        <img src="images/header1.jpg" class="d-block w-100" alt="...">
+        <img :src="firstMoviePosterPath(latestMovies[0])" class="d-block w-100" alt="...">
       </div>
-      <div v-for="(movie, idx) in latestMovies" :key="idx"
+      <div v-for="(movie, idx) in latestMovies.slice(1)" :key="idx"
       class="carousel-item">
         <img :src="fullPosterPath(movie.poster_path)" class="d-block w-100" alt="...">       
+        
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -84,6 +84,10 @@ export default {
 
   // },
   methods: {
+    firstMoviePosterPath: function (movie) {
+      const basePosterPath = 'https://image.tmdb.org/t/p/original'
+      return (basePosterPath + movie.poster_path)
+    },
     fullPosterPath: function (poster_path) {
       const basePosterPath = 'https://image.tmdb.org/t/p/original'
       return (basePosterPath + poster_path)
