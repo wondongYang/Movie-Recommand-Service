@@ -32,7 +32,7 @@
             <tbody>
               <tr v-for="(like_review, like_reviewIdx) in person.like_reviews" :key="'like_reviews_'+like_reviewIdx">
                 <th scope="row">{{like_review.id}}</th>
-                <td>{{like_review.movie}}</td>
+                <td>{{like_review.movie.title}}</td>
                 <td>{{like_review.rank|rankRepr}}</td>
                 <td>
                 <router-link :to="{name: 'ReviewDetail', params:{reviewId: like_review.id}}">
@@ -62,7 +62,7 @@
             <tbody>
               <tr v-for="(review, reviewIdx) in person.review_set" :key="'review_'+reviewIdx">
                 <th scope="row">{{review.id}}</th>
-                <td>{{review.movie}}</td>
+                <td>{{review.movie.title}}</td>
                 <td>{{review.rank|rankRepr}}</td>
                 <td>
                 <router-link :to="{name: 'ReviewDetail', params:{reviewId: review.id}}">
@@ -93,9 +93,9 @@
         </div>
       </div>
       <div class="col-4 text-end">
-        <button></button>
+        <!-- <button></button>
         <br>
-        <button>회원정보 수정</button>
+        <button>회원정보 수정</button> -->
       </div>
     </div>
   </div>

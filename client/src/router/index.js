@@ -8,6 +8,7 @@ import ReviewDetail from '@/views/ReviewDetail'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import Profile from '@/views/accounts/Profile'
+import Search from '@/views/Search'
 
 Vue.use(VueRouter)
 
@@ -56,6 +57,11 @@ const routes = [
     path: '/movies/:movieId/reviewform/:reviewId',
     name: 'UpdateReviewForm',
     component: ReviewForm
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
   },
   
 ]
