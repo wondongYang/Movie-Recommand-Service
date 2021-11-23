@@ -23,7 +23,6 @@ export default {
   },
   methods: {
     getSearch: function (query) {
-      console.log(query)
       this.query = query
       axios({
         method: 'get',

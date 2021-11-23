@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
   name: 'SearchForm',
   data: function () {
@@ -15,8 +16,11 @@ export default {
   },
   methods: {
     inputSearch: function (query) {
-      console.log(query)
-      this.$emit('inputSearch', query)
+      console.log('wow')
+      if (_.trim(query)) {
+        console.log(query)
+        this.$emit('inputSearch', query)
+      }
     },
   }
 }
