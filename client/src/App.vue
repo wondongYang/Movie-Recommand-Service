@@ -12,10 +12,10 @@
           <div v-if="login" class="collapse navbar-collapse justify-content-end" id="navbarToggler">
             <br>
             <ul class="navbar-nav mb-2 mb-lg-0 mx-lg-5 text-end">
-                <router-link :to="{name: 'Profile', params:{username: username}}" class="d-flex justify-content-end ms-3 nav-item" >{{ username }}</router-link>
-                <router-link :to="{name: 'Recommend'}" class="ms-3 nav-item">Recommendation</router-link>
-                <router-link :to="{name: 'Search'}" class="ms-3 nav-item">Search</router-link>
-                <router-link to="#" @click.native="logout" class="ms-3 nav-item">Logout</router-link>
+              <router-link :to="{name: 'Profile', params:{username: username}}" class="d-flex justify-content-end ms-3 nav-item" >{{ username }}</router-link>
+              <router-link :to="{name: 'Recommend'}" class="ms-3 nav-item">Recommendation</router-link>
+              <router-link :to="{name: 'Search'}" class="ms-3 nav-item">Search</router-link>
+              <router-link to="#" @click.native="logout" class="ms-3 nav-item">Logout</router-link>
             </ul>
           </div>
           <div v-else class="collapse navbar-collapse justify-content-end" id="navbarToggler">
@@ -23,6 +23,7 @@
             <ul class="navbar-nav mb-2 mb-lg-0 mx-lg-5 text-end">
               <router-link :to="{name: 'Login'}" class="ms-3 nav-item">Login</router-link>
               <router-link :to="{name: 'Signup'}" class="ms-3 nav-item">Signup</router-link>
+              <router-link :to="{name: 'Search'}" class="ms-3 nav-item">Search</router-link>
             </ul>
           </div>
         
