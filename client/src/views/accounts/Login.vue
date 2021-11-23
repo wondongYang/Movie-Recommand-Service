@@ -2,6 +2,9 @@
   <div class="container">
     <div class="row g-3 text-start">
       <h1>로그인</h1>
+      <div v-if="error">
+        <p v-for="(error, erroridx) in error.response.data" :key="erroridx">{{error}}</p>
+      </div>
       <div class="">
         <label for="username" class="form-label">계정 이름</label>
         <input type="text" id="username" v-model="credentials.username" class="form-control">
@@ -29,6 +32,7 @@ export default {
         username: null,
         password: null,
       },
+      error: null,
     }
   },
   methods: {
@@ -47,6 +51,7 @@ export default {
       })
       .catch(error => {
         console.log(error)
+        this.error = error
       })
       
     }
