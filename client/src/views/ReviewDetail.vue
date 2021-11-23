@@ -18,7 +18,7 @@
         <div class="col-12 text-start">
           <h3>{{ review.movie.title }}</h3>
           <div>
-            <span>{{ review.user.username }}</span>
+            <span><router-link :to="{name: 'Profile', params: {'username': review.user.username}}">{{ review.user.username }}</router-link></span>
           </div>
           <div class="text-start fs-2">
             {{ rank_repr }}<span class="fs-6">/5</span>
@@ -151,7 +151,7 @@ export default {
   },
   created: function () {
     this.getReview()
-  }
+  },
 }
 </script>
 
