@@ -3,6 +3,7 @@
     <div id="nav" class="navbar navbar-light bg-light sticky-top mb-5">
       <div class="container">
         <router-link class="text-decoration-none" :to="{name: 'Home'}">
+        <img src="./assets/5760.jpg" alt="" width="20" height="20" class="d-inline-block align-text-top">
         <span class="navbar-brand me-auto">SoySource</span>
         </router-link>
         <!-- <router-link :to="{name: 'Home'}">Home</router-link> -->
