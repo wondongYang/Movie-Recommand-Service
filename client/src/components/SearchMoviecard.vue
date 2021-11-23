@@ -1,12 +1,12 @@
 <template>
-  <div class="card mb-3" style="max-width: 720px;">
+  <div class="card mb-3 box-shade" style="max-width: 720px;">
     <router-link :to="{name: 'MovieDetail', params: {movieId: movie.id}}" :movie="movie" class="text-decoration-none link-dark">
     <div class="row g-0">
       <div class="col-md-4">
         <img :src="fullPosterPath" class="img-fluid rounded-start" alt="movie poster">
       </div>
       <div class="col-md-8">
-        <div class="card-body text-start">
+        <div class="card-body text-start m-3">
           <h5 class="card-title">{{ movie.title }}</h5>
           <p class="card-text"><small class="text-muted"><span v-for="(genre, id) in movie.genre_ids" :key="id">#{{genre.name}} </span></small></p>
           <br>

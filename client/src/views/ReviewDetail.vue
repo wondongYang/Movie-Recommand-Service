@@ -2,7 +2,8 @@
   <div class="container">
     <div v-if="review">
       <div class="d-flex justify-content-between">
-        <router-link :to="{name: 'MovieDetail', params: {'movieId': review.movie.id }}" class="btn btn-secondary me-auto" >뒤로</router-link>
+        <!-- <router-link :to="{name: 'MovieDetail', params: {'movieId': review.movie.id }}" class="btn btn-secondary me-auto" >뒤로</router-link> -->
+        <router-link :to="router.go(-1)" class="btn btn-secondary me-auto" >뒤로</router-link>
         <div>좋아요 수: {{ count }}</div>
       </div>
       <div>

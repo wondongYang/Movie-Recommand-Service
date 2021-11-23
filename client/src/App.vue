@@ -113,4 +113,8 @@ export default {
 .star {
     color: orange;
   }
+
+.box-shade {
+  box-shadow: 0px 4px 5px 0px;
+}
 </style>
