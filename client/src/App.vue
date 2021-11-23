@@ -10,6 +10,7 @@
           <div v-if="login" class="nav-item">
             <router-link :to="{name: 'Profile', params:{username: username}}" class="ms-3 nav-item">{{ username }}</router-link>
             <router-link :to="{name: 'Recommend'}" class="ms-3 nav-item">Recommendation</router-link>
+            <router-link :to="{name: 'Search'}" class="ms-3 nav-item">Search</router-link>
             <router-link to="#" @click.native="logout" class="ms-3 nav-item">Logout</router-link>
           </div>
           <div class="navbar-nav d-flex" v-else>

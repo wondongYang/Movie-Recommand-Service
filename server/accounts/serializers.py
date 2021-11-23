@@ -14,6 +14,9 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'password',)
 
 
+
+# 프로필에서 쓰일 영화 정보를 정의하기 위한 Serializer입니다.
+# (좋아요한 영화, 리뷰 영화 정보, ...)
 class ProfileMovieSerializer(serializers.ModelSerializer):
         class Meta:
             model = Movie

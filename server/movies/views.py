@@ -3,6 +3,7 @@ import datetime
 from django.http.response import JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.db.models import Count
+from django.core.paginator import Paginator
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
@@ -78,8 +79,22 @@ def movie_likes(request, movie_pk):
     }
     return JsonResponse(like_status)
 
-@permission_classes([AllowAny])
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def movie_recommended(request):
     pass
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def movie_search_list(request):
+    query = request.GET.get('q')
+
+    movies = Movie.objects.filter(title__icontains=query)
+    paginator = Paginator(movies, 10)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    serializer = MovieListSerializer(page_obj, many=True)
+    return Response(serializer.data)
 
