@@ -24,7 +24,7 @@
           <div>
             <span><router-link :to="{name: 'Profile', params: {'username': review.user.username}}">{{ review.user.username }}</router-link></span>
           </div>
-          <div class="text-start fs-2">
+          <div class="text-start fs-2 star">
             {{ rank_repr }}<span class="fs-6">/5</span>
           </div>
           <div>
@@ -36,7 +36,21 @@
             <router-link :to="{name: 'UpdateReviewForm', params:{reviewId: review.id, movieId: review.movie.id}}">
               <button class="btn btn-warning m-1">수정</button>
             </router-link>
-            <button class="btn btn-warning m-1" @click="deleteReview">삭제</button>
+            <!-- <button class="btn btn-warning m-1" @click="deleteReview">삭제</button> -->
+            <button class="btn btn-warning m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">삭제</button>
+              <div class="modal fade text-center" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      정말 삭제하시겠습니까?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                      <button type="button" class="btn btn-warning" data-bs-dismiss="modal" @click="deleteReview">삭제</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       <hr>
