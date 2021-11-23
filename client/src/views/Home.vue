@@ -14,7 +14,7 @@
         <MovieCard v-for="(movie, idx) in latestMovies" :key="idx" :movie="movie" />
       </div>
       <hr>
-      <h3>리뷰가 많이 달린 영화</h3>
+      <h3>좋아요를 많이 받은 영화</h3>
       <div v-if="largestReviewMovies" class="d-flex flex-wrap justify-content-evenly p-3">
         <MovieCard v-for="(movie, idx) in largestReviewMovies" :key="idx" :movie="movie" />
       </div>

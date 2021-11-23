@@ -34,7 +34,7 @@ def latest_movie_list(request):
 @permission_classes([AllowAny])
 def review_desc_movie_list(request):
     # Movie에 달린 Review를 세어서 (reviews__count) 갯수 역순으로 5개
-    movies = Movie.objects.annotate(Count('reviews')).order_by('-reviews__count')[:N]
+    movies = Movie.objects.annotate(Count('like_users')).order_by('-like_users__count')[:N]
     serializer = MovieListSerializer(movies, many=True)
     return Response(serializer.data)
 
