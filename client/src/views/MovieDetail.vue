@@ -141,7 +141,7 @@ export default {
       day = parseInt(day)
       return `${year}년 ${month}월 ${day}일`
     }
-  }
+  },
   
 }
 </script>
