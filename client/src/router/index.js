@@ -59,7 +59,7 @@ const routes = [
     component: ReviewForm
   },
   {
-    path: '/movies/search',
+    path: '/search',
     name: 'Search',
     component: Search
   },

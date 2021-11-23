@@ -1,7 +1,7 @@
 <template>
   <div>
     <SearchForm @inputSearch="getSearch" />
-    <SearchList :movies="movies" />
+    <SearchList v-if="movies" :movies="movies" />
   </div>
 </template>
 
@@ -24,6 +24,7 @@ export default {
   methods: {
     getSearch: function (query) {
       this.query = query
+      console.log('send')
       axios({
         method: 'get',
         url: `${SERVER_URL}/movies/search/`,
