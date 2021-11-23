@@ -53,8 +53,7 @@
       </div>
       <div v-for="(movie, idx) in latestMovies.slice(1)" :key="idx"
       class="carousel-item">
-        <img :src="fullPosterPath(movie.poster_path)" class="d-block w-100" alt="...">       
-        
+        <img :src="fullPosterPath(movie.poster_path)" class="d-block w-100" alt="...">            
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

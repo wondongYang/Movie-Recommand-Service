@@ -2,17 +2,19 @@
   <div>
     <!-- 최초에 로드되지 않은 movie(null)를 참조할 때 error가 발생하는 것을 막기 위해 v-if를 사용합니다-->
     <div v-if="movie" class="container">
-      <div class="d-flex">
-        <router-link :to="{name: 'Home',}" class="btn btn-secondary me-auto" >뒤로</router-link>
+      <div class="d-flex justify-content-between">
+        <router-link :to="{name: 'Home',}" type="button" class="btn btn-secondary me-auto" >뒤로</router-link>
+        <div>좋아요 수: {{ count }}</div>
       </div>
-      <div v-if="login">
-        <p>좋아요 수: {{ count }}</p>
-        <div v-if="like">
-          <button @click="LikeMovie(movieId)">좋아요 취소</button>
-        </div>
-        <div v-else>
-          <button @click="LikeMovie(movieId)">좋아요</button>
-        </div>
+      <div v-if="like" class="d-flex justify-content-end">
+        <button @click="LikeMovie(movieId)" class="btn btn-link">
+          <i class="fa-solid fa-thumbs-down"></i>
+        </button>
+      </div>
+      <div v-else class="d-flex justify-content-end">
+        <button @click="LikeMovie(movieId)" class="btn btn-link">
+          <i class="fa-solid fa-thumbs-up"></i>
+        </button>
       </div>
       <hr>
       <div class="row">

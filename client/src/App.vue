@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav" class="navbar navbar-light bg-light sticky-top mb-5">
+    <div id="nav" class="navbar navbar-expand-lg navbar-light bg-light sticky-top mb-5">
       <div class="container">
         <router-link class="text-decoration-none" :to="{name: 'Home'}">
         <img src="./assets/5760.jpg" alt="" width="20" height="20" class="d-inline-block align-text-top">
@@ -8,8 +8,11 @@
         </router-link>
         <!-- <router-link :to="{name: 'Home'}">Home</router-link> -->
         <div class="d-flex align-items-center">
-          <div v-if="login" class="nav-item">
-            <router-link :to="{name: 'Profile', params:{username: username}}" class="ms-3 nav-item">{{ username }}</router-link>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div v-if="login" class="collapse navbar-collapse justify-content-end" id="navbarToggler">
+            <router-link :to="{name: 'Profile', params:{username: username}}" class="ms-3 nav-item" >{{ username }}</router-link>
             <router-link :to="{name: 'Recommend'}" class="ms-3 nav-item">Recommendation</router-link>
             <router-link to="#" @click.native="logout" class="ms-3 nav-item">Logout</router-link>
           </div>
