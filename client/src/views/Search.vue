@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="container">
     <SearchForm @inputSearch="getSearch" />
+    <hr>
     <SearchList v-if="movies" :movies="movies" />
   </div>
 </template>
