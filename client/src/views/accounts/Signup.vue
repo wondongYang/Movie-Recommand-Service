@@ -5,21 +5,21 @@
       <div v-if="error">
         <p v-for="(error, erroridx) in error.response.data" :key="erroridx">{{error}}</p>
       </div>
-    <div>
+    <div class="form-floating">
+      <input type="text" id="username" v-model="credentials.username" class="form-control" placeholder="examplename">
       <label for="username" class="form-label">계정 이름</label>
-      <input type="text" id="username" v-model="credentials.username" class="form-control">
     </div>
-    <div>
+    <div class="form-floating">
+      <input type="password" id="password" v-model="credentials.password" class="form-control" placeholder="examplepwd">
       <label for="password" class="form-label">비밀번호</label>
-      <input type="password" id="password" v-model="credentials.password" class="form-control">
     </div>
-    <div>
+    <div class="form-floating">
+      <input type="password" id="passwordConfirmation" v-model="credentials.passwordConfirmation" @keypress.enter="signup(credentials)" class="form-control" placeholder="examplepwd">
       <label for="passwordConfirmation" class="form-label">비밀번호 확인</label>
-      <input type="password" id="passwordConfirmation" v-model="credentials.passwordConfirmation" @keypress.enter="signup(credentials)" class="form-control">
     </div>
   </div>
-    <button @click="signup(credentials)" class="btn btn-primary m-3">가입하기</button>
-    <router-link :to="{name: 'Home'}" class="btn btn-secondary m-3">뒤로</router-link>
+    <button @click="signup(credentials)" class="btn btn-primary btn-lg m-3">가입하기</button>
+    <router-link :to="{name: 'Home'}" class="btn btn-secondary btn-lg m-3">뒤로</router-link>
   </div>
 </template>
 

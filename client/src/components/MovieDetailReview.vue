@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <router-link :to="{name: 'ReviewDetail', params:{reviewId: review.id}}" class="text-decoration-none">
+    <router-link :to="{name: 'ReviewDetail', params:{reviewId: review.id}}" class="text-decoration-none link-dark">
       <div class="d-flex justify-content-between">
       <p>{{ review.content }}</p>
-      <p>{{ rank_repr }} {{review.user.username}}</p>
+      <p><span class="star">{{ rank_repr }}</span> {{review.user.username}}</p>
       </div>
     </router-link>
   </div>
@@ -25,5 +25,5 @@ export default {
 </script>
 
 <style>
-
+  
 </style>
