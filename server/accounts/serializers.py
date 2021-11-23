@@ -13,8 +13,22 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('username', 'password',)
 
-class UserProfileSerializer(serializers.ModelSerializer):
 
+class ProfileMovieSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Movie
+            fields = ('id', 'title', 'poster_path')
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    
+    like_movies = ProfileMovieSerializer(many=True, read_only=True)
+    class ProfileReviewSerializer(serializers.ModelSerializer):
+        movie = ProfileMovieSerializer(read_only=True)
+        class Meta:
+            model = Review
+            fields = ('id', 'rank', 'movie', 'content',)
+    like_reviews = ProfileReviewSerializer(many=True, read_only=True)
+    review_set = ProfileReviewSerializer(many=True, read_only=True)
     # class WrittenReviewSerializer(serializers.ModelSerializer):
     #     class WRmovieSerializer(serializers.ModelSerializer):
     #         class Meta:
@@ -27,6 +41,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     #         # fields = ('id',)
 
     # review_set = WrittenReviewSerializer(many=True, read_only=True)
+    
     class Meta:
         model = User
         fields = ('username', 'date_joined', 'like_movies', 'like_reviews', 'review_set','comment_set')
