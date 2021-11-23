@@ -21,7 +21,7 @@ def movie_list(request):
     return Response(serializer.data)
 
 # 각각 몇개 들고 올까요?
-N = 4
+N = 16
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def latest_movie_list(request):
