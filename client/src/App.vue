@@ -6,14 +6,20 @@
         <span class="navbar-brand me-auto">SoySource</span>
         </router-link>
         <!-- <router-link :to="{name: 'Home'}">Home</router-link> -->
-        <div v-if="login">
-          <router-link :to="{name: 'Profile', params:{username: username}}" class="ms-3">{{ username }}</router-link>
-          <router-link :to="{name: 'Recommend'}" class="ms-3">Recommendation</router-link>
-          <router-link to="#" @click.native="logout" class="ms-3">Logout</router-link>
-        </div>
-        <div v-else>
-          <router-link :to="{name: 'Login'}" class="ms-3">Login</router-link>
-          <router-link :to="{name: 'Signup'}" class="ms-3">Signup</router-link>
+        <div class="d-flex align-items-center">
+          <div v-if="login" class="nav-item">
+            <router-link :to="{name: 'Profile', params:{username: username}}" class="ms-3 nav-item">{{ username }}</router-link>
+            <router-link :to="{name: 'Recommend'}" class="ms-3 nav-item">Recommendation</router-link>
+            <router-link to="#" @click.native="logout" class="ms-3 nav-item">Logout</router-link>
+          </div>
+          <div class="navbar-nav d-flex" v-else>
+            <router-link :to="{name: 'Login'}" class="ms-3 nav-item">Login</router-link>
+            <router-link :to="{name: 'Signup'}" class="ms-3 nav-item">Signup</router-link>
+          </div>
+          <!-- <div class="ms-3 d-flex nav-item">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </div> -->
         </div>
       </div>
     </div>
