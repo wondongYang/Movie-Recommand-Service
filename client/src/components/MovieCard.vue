@@ -5,7 +5,9 @@
     <div class="card-body">
       <h3>{{movie.title}}</h3>
       <span v-for="(genre, id) in movie.genre_ids" :key="id">#{{genre.name}} </span>
-      <!-- <p>{{movie.overview}}</p> -->
+      <div>
+        <p class="card-text text-end"><small class="text-muted"> <span class="text-danger">❤</span> {{ movie.like_users.length }} | 📝 {{ movie.reviews.length }}</small></p>
+      </div>
     </div>
     </router-link>
   </div>
