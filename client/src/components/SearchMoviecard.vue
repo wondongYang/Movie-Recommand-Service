@@ -11,7 +11,8 @@
           <p class="card-text"><small class="text-muted"><span v-for="(genre, id) in movie.genre_ids" :key="id">#{{genre.name}} </span></small></p>
           <br>
           <p class="card-text">{{ movie.overview | overviewAbbr }}</p>
-          <p class="card-text"><small class="text-muted">좋아요 명</small></p>
+          <p class="card-text"><small class="text-muted">좋아요 {{ movie.like_users.length }}명</small></p>
+          <p class="card-text"><small class="text-muted">리뷰 {{ movie.reviews.length }}건</small></p>
         </div>
       </div>
     </div>

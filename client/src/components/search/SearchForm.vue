@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <input type="text" v-model="query" @keyup.enter="inputSearch(query)">
-    <button @click="inputSearch(query)">검색</button>
+  <div class="d-flex flex-row-reverse align-items-center">
+    <div class="m-3">
+      <button @click="inputSearch(query)" class="btn btn-primary">검색</button>
+    </div>
+    <div class="flex-grow-1 m-3">
+      <input type="text" v-model="query" @keyup.enter="inputSearch(query)" class="form-control">
+    </div>
   </div>
 </template>
 

@@ -46,7 +46,12 @@
           <ReviewDetailComments :comment="comment" @commentDeleted="getReview" />
           <br>
         </div>
+        <div v-if="login">
         <ReviewDetailCommentsform :reviewId="reviewId" @commentAdded="getReview" />
+        </div>
+        <div v-else>
+          <router-link :to="{name: 'Login'}">댓글을 남기려면 로그인하세요.</router-link>
+        </div>
         <!-- {{ review.comment_set }} -->
       </div>
      </div>
@@ -58,7 +63,7 @@
 import axios from 'axios'
 import ReviewDetailComments from '@/components/ReviewDetailComments'
 import ReviewDetailCommentsform from '@/components/ReviewDetailCommentsform'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
@@ -152,6 +157,7 @@ export default {
     username: function () {
       return this.$store.state.username
     },
+    ...mapState(['login'])
   },
   created: function () {
     this.getReview()

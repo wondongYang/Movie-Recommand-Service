@@ -98,3 +98,11 @@ def movie_search_list(request):
     serializer = MovieListSerializer(page_obj, many=True)
     return Response(serializer.data)
 
+
+# @api_view(['GET'])
+# def movie_recommended_model1(request):
+#     user = request.user
+#     movies = Movie.objects.exclude(liked_user__in=user)
+#     serializer = MovieListSerializer(movies, many=True)
+#     serializer()
+#     return Response()
