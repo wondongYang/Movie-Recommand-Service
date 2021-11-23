@@ -1,31 +1,31 @@
 <template>
   <div id="app">
     <div id="nav" class="navbar navbar-expand-lg navbar-light bg-light sticky-top mb-5">
-      <div class="container">
+      <div class="container-fluid">
         <router-link class="text-decoration-none" :to="{name: 'Home'}">
         <img src="./assets/5760.jpg" alt="" width="20" height="20" class="d-inline-block align-text-top">
         <span class="navbar-brand me-auto">SoySource</span>
         </router-link>
-        <!-- <router-link :to="{name: 'Home'}">Home</router-link> -->
-        <div class="d-flex align-items-center">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div v-if="login" class="collapse navbar-collapse justify-content-end" id="navbarToggler">
-            <router-link :to="{name: 'Profile', params:{username: username}}" class="ms-3 nav-item" >{{ username }}</router-link>
-            <router-link :to="{name: 'Recommend'}" class="ms-3 nav-item">Recommendation</router-link>
-            <router-link :to="{name: 'Search'}" class="ms-3 nav-item">Search</router-link>
-            <router-link to="#" @click.native="logout" class="ms-3 nav-item">Logout</router-link>
+            <br>
+            <ul class="navbar-nav mb-2 mb-lg-0 mx-lg-5 text-end">
+                <router-link :to="{name: 'Profile', params:{username: username}}" class="d-flex justify-content-end ms-3 nav-item" >{{ username }}</router-link>
+                <router-link :to="{name: 'Recommend'}" class="ms-3 nav-item">Recommendation</router-link>
+                <router-link :to="{name: 'Search'}" class="ms-3 nav-item">Search</router-link>
+                <router-link to="#" @click.native="logout" class="ms-3 nav-item">Logout</router-link>
+            </ul>
           </div>
-          <div class="navbar-nav d-flex" v-else>
-            <router-link :to="{name: 'Login'}" class="ms-3 nav-item">Login</router-link>
-            <router-link :to="{name: 'Signup'}" class="ms-3 nav-item">Signup</router-link>
+          <div v-else class="collapse navbar-collapse justify-content-end" id="navbarToggler">
+            <br>
+            <ul class="navbar-nav mb-2 mb-lg-0 mx-lg-5 text-end">
+              <router-link :to="{name: 'Login'}" class="ms-3 nav-item">Login</router-link>
+              <router-link :to="{name: 'Signup'}" class="ms-3 nav-item">Signup</router-link>
+            </ul>
           </div>
-          <!-- <div class="ms-3 d-flex nav-item">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </div> -->
-        </div>
+        
       </div>
     </div>
     <router-view />
