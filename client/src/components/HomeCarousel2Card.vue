@@ -1,6 +1,6 @@
 <template>
-  <div class="card mb-3 box-shade" style="max-width: 720px;">
-    <router-link :to="{name: 'MovieDetail', params: {movieId: movie.id}}" :movie="movie" class="text-decoration-none link-dark">
+  <div class="card bg-dark text-white mb-3" style="max-width: 720px;">
+    <router-link :to="{name: 'MovieDetail', params: {movieId: movie.id}}" :movie="movie" class="text-decoration-none link-light">
     <div class="row g-0">
       <div class="col-md-4">
         <img :src="fullPosterPath" class="img-fluid rounded-start" alt="movie poster">
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'SearchMoviecard',
+  name: 'HomeCarousel2Card',
   props: {
     movie: Object,
   },
