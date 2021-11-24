@@ -77,7 +77,6 @@ export default {
           num = num+1
         }
       }
-      console.log(this.MovieBoxList[0])
       return this.MovieBoxList
     },
     firstMoviePosterPath: function (movie) {
