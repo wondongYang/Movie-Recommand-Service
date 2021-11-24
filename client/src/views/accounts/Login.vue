@@ -2,7 +2,7 @@
   <div class="container form-signin needs-validation">
     <div class="row g-3 text-start">
       <h1>로그인</h1>
-      <div v-if="error">
+      <div v-if="error" class="alert alert-warning">
         <p v-for="(error, erroridx) in error.response.data" :key="erroridx">{{error}}</p>
       </div>
       <div class="form-floating has-validation">
