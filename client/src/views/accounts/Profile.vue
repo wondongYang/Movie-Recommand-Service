@@ -13,12 +13,17 @@
         <div>
           <p>좋아하는 영화</p>
           <div class="d-flex flex-wrap">
-            <div v-for="(movie, movieIdx) in person.like_movies" :key="'like_movies_'+movieIdx">
+            <div v-for="(movie, movieIdx) in like_movie_calData" :key="'like_movies_'+movieIdx">
               <router-link :to="{name: 'MovieDetail', params:{movieId: movie.id}}">
               <MovieSmallcard :movie="movie" />
               </router-link>
             </div>
           </div>
+          <v-pagination
+            class="d-flex justify-content-center"
+            v-model="curPageNum"
+            :page-count="like_movie_numOfPages"> 
+          </v-pagination>
           <p>좋아하는 리뷰</p>
           <table class="table">
             <thead>
@@ -30,7 +35,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(like_review, like_reviewIdx) in person.like_reviews" :key="'like_reviews_'+like_reviewIdx">
+              <tr v-for="(like_review, like_reviewIdx) in like_review_calData" :key="'like_reviews_'+like_reviewIdx">
                 <th scope="row">{{like_review.id}}</th>
                 <td>{{like_review.movie.title}}</td>
                 <td class="star">{{like_review.rank|rankRepr}}</td>
@@ -42,6 +47,11 @@
               </tr>
             </tbody>
           </table>
+          <v-pagination
+            class="d-flex justify-content-center"
+            v-model="curPageNum"
+            :page-count="like_review_numOfPages"> 
+          </v-pagination>
 
 <!-- 
           <div v-for="(like_review, like_reviewIdx) in person.like_reviews" :key="'like_reviews_'+like_reviewIdx">
@@ -60,7 +70,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(review, reviewIdx) in person.review_set" :key="'review_'+reviewIdx">
+              <tr v-for="(review, reviewIdx) in write_review_calData" :key="'review_'+reviewIdx">
                 <th scope="row">{{review.id}}</th>
                 <td>{{review.movie.title}}</td>
                 <td class="star">{{review.rank|rankRepr}}</td>
@@ -72,6 +82,11 @@
               </tr>
             </tbody>
           </table>
+          <v-pagination
+            class="d-flex justify-content-center"
+            v-model="curPageNum"
+            :page-count="write_review_numOfPages"> 
+          </v-pagination>
           <br>
           <p>작성 댓글</p>
           <table class="table">
@@ -81,11 +96,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(comment, commentIdx) in person.comment_set" :key="'comment_'+commentIdx">
+              <tr v-for="(comment, commentIdx) in write_comment_calData" :key="'comment_'+commentIdx">
                 <td>{{comment.content}}</td>
               </tr>
             </tbody>
           </table>
+          <v-pagination
+            class="d-flex justify-content-center"
+            v-model="curPageNum"
+            :page-count="write_comment_numOfPages"> 
+          </v-pagination>
 
           <!-- <div v-for="(comment, commentIdx) in person.comment_set" :key="'comment_'+commentIdx">
             <p>{{comment.content}}</p>
@@ -102,6 +122,7 @@
 </template>
 
 <script>
+import vPagination from '@/components/vPagination'
 import axios from 'axios'
 import MovieSmallcard from '@/components/MovieSmallcard'
 import { mapState } from 'vuex'
@@ -109,11 +130,14 @@ const SERVER_URL = process.env.VUE_APP_SERVER_URL
 export default {
   name: 'Profile',
   components: {
-    MovieSmallcard
+    MovieSmallcard,
+    vPagination,
   },
   data: function () {
     return {
       person: {},
+      dataPerPage: 5,
+      curPageNum: 1,
     }
   },
   methods: {
@@ -124,6 +148,7 @@ export default {
       })
       .then(response => {
         this.person = response.data
+        console.log(this.person)
       })
       .catch(error => {
         console.log(error)
@@ -131,7 +156,41 @@ export default {
     },
   },
   computed: {
-    ...mapState(['username'])
+    ...mapState(['username']),
+    startOffset() {
+      return ((this.curPageNum - 1) * this.dataPerPage);
+    },
+    endOffset() {
+      return (this.startOffset + this.dataPerPage);
+    },
+    // 좋아하는 영화 pagination
+    like_movie_numOfPages() {
+      return Math.ceil(this.person.like_movies.length / this.dataPerPage);
+    },
+    like_movie_calData() {
+      return this.person.like_movies.slice(this.startOffset, this.endOffset)
+    },
+    // 좋아하는 리뷰 pagination
+    like_review_numOfPages() {
+      return Math.ceil(this.person.like_reviews.length / this.dataPerPage);
+    },
+    like_review_calData() {
+      return this.person.like_reviews.slice(this.startOffset, this.endOffset)
+    },
+    // 작성 리뷰 pagination
+    write_review_numOfPages() {
+      return Math.ceil(this.person.review_set.length / this.dataPerPage);
+    },
+    write_review_calData() {
+      return this.person.review_set.slice(this.startOffset, this.endOffset)
+    },
+    // 작성 댓글 pagination
+    write_comment_numOfPages() {
+      return Math.ceil(this.person.comment_set.length / this.dataPerPage);
+    },
+    write_comment_calData() {
+      return this.person.comment_set.slice(this.startOffset, this.endOffset)
+    }
   },
   mounted: function () {
     this.getUserInfo(this.$route.params.username)
@@ -143,11 +202,11 @@ export default {
     },
     contentAbbr: function (content) {
       return (content.length < 20 ? content : content.slice(0, 20) + ' ...')
-    }
+    },
   },
 }
 </script>
 
-<style>
+<style> 
 
 </style>
