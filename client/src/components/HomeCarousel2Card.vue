@@ -1,5 +1,5 @@
 <template>
-  <div class="card bg-dark text-white mb-3" style="max-width: 720px;">
+  <div class="card bg-dark text-white mb-3" style="max-width: 720px;" v-if="movie">
     <router-link :to="{name: 'MovieDetail', params: {movieId: movie.id}}" :movie="movie" class="text-decoration-none link-light">
     <div class="row g-0">
       <div class="col-md-4">

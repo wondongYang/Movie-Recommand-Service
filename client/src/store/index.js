@@ -140,7 +140,11 @@ export default new Vuex.Store({
       .catch(error => {
         console.log(error)
       })
-    }
+    },
+
+    // goBack: function () {
+    //   // this.$router.go(-1)
+    // },
     
   },
   modules: {

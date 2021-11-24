@@ -65,5 +65,9 @@ export default {
   computed: {
     ...mapGetters(['latestMovies','largestReviewMovies','HomeGenreMovies',])
   },
+  created: function () {
+    this.$store.dispatch('getlatestMovies')
+    this.$store.dispatch('getlargestReviewMovies')
+  },
 }
 </script>

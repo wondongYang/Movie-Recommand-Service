@@ -7,7 +7,7 @@
       </div>
       <div class="col-md-8">
         <div class="card-body text-start m-3">
-          <h5 class="card-title">{{ movie.title }}</h5>
+          <h5 class="card-title wb-keep-all">{{ movie.title }}</h5>
           <p class="card-text"><small class="text-muted"><span v-for="(genre, id) in movie.genre_ids" :key="id">#{{genre.name}} </span></small></p>
           <br>
           <p class="card-text">{{ movie.overview | overviewAbbr }}</p>

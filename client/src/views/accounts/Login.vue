@@ -1,13 +1,16 @@
 <template>
-  <div class="container form-signin">
+  <div class="container form-signin needs-validation">
     <div class="row g-3 text-start">
       <h1>로그인</h1>
       <div v-if="error">
         <p v-for="(error, erroridx) in error.response.data" :key="erroridx">{{error}}</p>
       </div>
-      <div class="form-floating">
+      <div class="form-floating has-validation">
         <input type="text" id="username" v-model="credentials.username" class="floatingInput form-control" placeholder="examplename">
         <label for="username" class="form-label">계정 이름</label>
+        <div class="invalid-feedback">
+        Please choose a username.
+        </div>
       </div>
       <div class="form-floating">
         <input type="password" id="password" v-model="credentials.password" class="form-control" @keypress.enter="login(credentials)" placeholder="examplepwd">
