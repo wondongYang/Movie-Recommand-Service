@@ -1,5 +1,5 @@
 <template>
-  <div class="card m-3 box-shade" style="width: 10rem;">
+  <div class="card m-3 box-shade link-dark" style="width: 10rem;">
     <router-link :to="{name: 'MovieDetail', params: {movieId: movie.id}}" :movie="movie" class="text-decoration-none link-dark">
     <img :src="fullPosterPath" class="card-img-top" alt="Movie Poster">
     <div class="card-body">
