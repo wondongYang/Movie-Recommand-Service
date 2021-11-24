@@ -16,6 +16,12 @@ def signup(request):
 	#1-2. 패스워드 일치 여부 체크
     if password != password_confirmation:
         return Response({'error': '비밀번호가 일치하지 않습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    if len(password) < 8:
+        return Response({'error': '비밀번호는 8자리 이상이어야 합니다.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    if len(request.data.get('username')) < 4:
+        return Response({'error': '계정명은 4글자 이상이어야 합니다.'}, status=status.HTTP_400_BAD_REQUEST)
 		
 	#2. UserSerializer를 통해 데이터 직렬화
     serializer = UserSerializer(data=request.data)
