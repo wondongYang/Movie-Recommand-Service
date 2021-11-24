@@ -7,10 +7,13 @@ from django.core.paginator import Paginator
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
+from django.contrib.auth import get_user_model
+
+from community.models import Review
 
 from .models import Movie, Genre
 
-from .serializers import MovieListSerializer, MovieSerializer
+from .serializers import MovieListSerializer, MovieSerializer, SimpleGenreSeriliazer
 
 # Create your views here.
 @api_view(['GET'])
@@ -99,10 +102,17 @@ def movie_search_list(request):
     return Response(serializer.data)
 
 
-# @api_view(['GET'])
-# def movie_recommended_model1(request):
-#     user = request.user
-#     movies = Movie.objects.exclude(liked_user__in=user)
-#     serializer = MovieListSerializer(movies, many=True)
-#     serializer()
-#     return Response()
+
+# Model 1: 
+@api_view(['GET'])
+def movie_recommended_model1(request):
+    user = request.user
+    user_reviews = Review.objects.filter(user=user)
+    print(user)
+    most_liked_genre = Movie.objects.filter(like_users__in=[user]).values('genre_ids').annotate(gcount=Count('id')).order_by('-gcount')[0]
+    print(most_liked_genre)
+    genre_serialized = SimpleGenreSeriliazer(Genre.objects.get(id=most_liked_genre['genre_ids']))
+
+    movies = Movie.objects.exclude(like_users__in=[user]).exclude(reviews__in=user_reviews).filter(genre_ids__in=[most_liked_genre['genre_ids']])[:5]
+    serializer = MovieListSerializer(movies, many=True)
+    return JsonResponse({'genre': genre_serialized.data, 'recommendations': serializer.data})

@@ -33,7 +33,7 @@
               <tr v-for="(like_review, like_reviewIdx) in person.like_reviews" :key="'like_reviews_'+like_reviewIdx">
                 <th scope="row">{{like_review.id}}</th>
                 <td>{{like_review.movie.title}}</td>
-                <td>{{like_review.rank|rankRepr}}</td>
+                <td class="star">{{like_review.rank|rankRepr}}</td>
                 <td>
                 <router-link :to="{name: 'ReviewDetail', params:{reviewId: like_review.id}}">
                 {{like_review.content|contentAbbr}}
