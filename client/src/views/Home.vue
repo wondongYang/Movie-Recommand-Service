@@ -5,21 +5,23 @@
       <p> Soy Source </p>
     </div>
     <div>
-      <!-- <HomeCarousel /> -->
+      <h3>최근 개봉작</h3>
       <HomeCarousel2 :movies="latestMovies" />
+      <hr>
+      <h3>좋아요를 많이 받은 영화</h3>
+      <HomeCarousel />
+      <hr>
     </div>
     <br>
     <div>
-      <!-- <h3>최근 개봉작</h3>
-      <div v-if="latestMovies" class="d-flex flex-wrap justify-content-evenly p-3">
+      <!-- <div v-if="latestMovies" class="d-flex flex-wrap justify-content-evenly p-3">
         <MovieCard v-for="(movie, idx) in latestMovies" :key="idx" :movie="movie" />
       </div>
       <hr> -->
-      <h3>좋아요를 많이 받은 영화</h3>
-      <div v-if="largestReviewMovies" class="d-flex flex-wrap justify-content-evenly p-3">
+      <!-- <div v-if="largestReviewMovies" class="d-flex flex-wrap justify-content-evenly p-3">
         <MovieCard v-for="(movie, idx) in largestReviewMovies" :key="idx" :movie="movie" />
       </div>
-      <hr>
+      <hr> -->
       <div class="container">
         <h2>장르별 영화</h2>
         <div>
@@ -50,14 +52,14 @@
 // @ is an alias to /src
 // import {mapActions} from 'vuex'
 import MovieCard from '@/components/MovieCard'
-// import HomeCarousel from '@/components/HomeCarousel'
+import HomeCarousel from '@/components/HomeCarousel'
 import HomeCarousel2 from '@/components/HomeCarousel2'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   components: {
     MovieCard,
-    // HomeCarousel,
+    HomeCarousel,
     HomeCarousel2,
   },
   computed: {

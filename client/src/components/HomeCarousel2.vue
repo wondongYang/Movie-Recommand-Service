@@ -6,12 +6,16 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
+      <div class="d-flex justify-content-center">
+        <HomeCarousel2Card :movie="movies[0]" />
+      </div>
       <!-- <MovieCard :movie="movies[0]" /> -->
-      <HomeCarousel2Card :movie="movies[0]" />
     </div>
     <div class="carousel-item" v-for="(movie, idx) in movies.slice(1)" :key="idx">
+      <div class="d-flex justify-content-center">
+        <HomeCarousel2Card :movie="movie" />
+      </div>
       <!-- <MovieCard :movie="movie" /> -->
-      <HomeCarousel2Card :movie="movie" />
     </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
