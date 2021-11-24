@@ -19,7 +19,6 @@
         <MovieCard v-for="(movie, idx) in largestReviewMovies" :key="idx" :movie="movie" />
       </div>
       <hr>
-
       <div class="container">
         <h2>장르별 영화</h2>
         <div>
