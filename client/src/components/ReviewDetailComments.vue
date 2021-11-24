@@ -2,8 +2,9 @@
   <div class="text-start">
     {{ comment.user.username }} <br>
     {{ comment.content }}
-    <span class="ms-auto" >
-    <button v-if="username === comment.user.username" @click="deleteComment" class="btn btn-light btn-sm">❌</button>
+    <span class="ms-auto" v-if="username === comment.user.username">
+    <button @click="clickUpdateComment" class="btn btn-light btn-sm">수정</button>
+    <button @click="deleteComment" class="btn btn-light btn-sm">삭제</button>
     </span>
   </div>
 </template>
@@ -38,6 +39,10 @@ export default {
         console.log(error)
       })
     },
+    clickUpdateComment: function () {
+      this.$emit('onClickUpdateComment')
+    },
+    
     ...mapActions(['setToken',])
   },
   computed: {

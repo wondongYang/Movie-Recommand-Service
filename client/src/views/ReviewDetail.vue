@@ -58,12 +58,13 @@
       <hr>
       <div v-if="review">
         <!-- 현재 django에 Review에서 Comment를 불러올 related_name이 없음 -->
-        <div v-for="(comment, idx) in review.comments" :key="idx">
-          <ReviewDetailComments :comment="comment" @commentDeleted="getReview" />
+        <div v-for="comment in review.comments" :key="comment.id">
+          <ReviewDetailComments :comment="comment" @commentDeleted="getReview" @onClickUpdateComment="setUpdateCommentForm(comment.id)" />
+          <ReviewDetailCommentsform class="visually-hidden" :reviewId="reviewId" @commentUpdated="onCommentUpdated(comment.id)" :id="'comment'+comment.id" :data-id="comment.id" :mode="'put'" :initCommentInput="comment.content" />
           <br>
         </div>
         <div v-if="login">
-        <ReviewDetailCommentsform :reviewId="reviewId" @commentAdded="getReview" />
+        <ReviewDetailCommentsform :reviewId="reviewId" @commentAdded="getReview" :mode="'post'" />
         </div>
         <div v-else>
           <router-link :to="{name: 'Login'}">댓글을 남기려면 로그인하세요.</router-link>
@@ -148,6 +149,17 @@ export default {
       })
     }, 
 
+    setUpdateCommentForm: function (commentId) {
+      const picked = document.querySelector(`#comment${commentId}`)
+      picked.classList.toggle('visually-hidden')
+    },
+
+    onCommentUpdated: function (commentId) {
+      const picked = document.querySelector(`#comment${commentId}`)
+      picked.classList.toggle('visually-hidden')
+      this.getReview()
+    },
+
     deleteReview: function () {
       this.setToken()
       axios({
@@ -163,6 +175,10 @@ export default {
         console.log(error)
       })
     },
+
+    // setUpdateCommentForm: function (comment) {
+
+    // },
     ...mapActions(['setToken', ])
   },
   computed: {
