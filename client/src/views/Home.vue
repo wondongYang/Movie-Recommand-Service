@@ -1,10 +1,6 @@
 <template>
   <div class="home">
     <div>
-      <p> 메인 화면이 들어갈 공간입니다. (Carousel이나 Wallpaper 등...)</p>
-      <p> Soy Source </p>
-    </div>
-    <div>
       <h3>최근 개봉작</h3>
       <HomeCarousel2 :movies="latestMovies" />
       <hr>
@@ -64,6 +60,10 @@ export default {
   },
   computed: {
     ...mapGetters(['latestMovies','largestReviewMovies','HomeGenreMovies',])
+  },
+  created: function () {
+    this.$store.dispatch('getlatestMovies')
+    this.$store.dispatch('getlargestReviewMovies')
   },
 }
 </script>

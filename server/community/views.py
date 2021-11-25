@@ -125,7 +125,7 @@ def comment_create(request, review_pk):
     # else:
     #     return Response({'error': '로그인을 해주세요.'}, status=status.HTTP_401_UNAUTHORIZED) 
 
-@api_view(['DELETE',])
+@api_view(['DELETE', 'PUT'])
 def comment_delete(request, review_pk, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
     if request.method == 'DELETE':
@@ -134,5 +134,12 @@ def comment_delete(request, review_pk, comment_pk):
             return Response({'id': comment_pk}, status=status.HTTP_204_NO_CONTENT)
         else:
             return Response({'error': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
+
+    elif request.method == 'PUT':
+        if request.user == comment.user:
+            serializer = CommentSerializer(instance=comment, data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
     else:
         return Response({'error': '잘못된 요청입니다.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

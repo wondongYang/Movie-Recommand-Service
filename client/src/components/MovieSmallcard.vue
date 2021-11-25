@@ -3,7 +3,7 @@
     <router-link :to="{name: 'MovieDetail', params: {movieId: movie.id}}" :movie="movie" class="text-decoration-none link-dark">
     <img :src="fullPosterPath" class="card-img-top" alt="Movie Poster">
     <div class="card-body">
-      <p class="text-decoration-none">{{movie.title}}</p>
+      <p class="text-decoration-none wb-keep-all">{{movie.title}}</p>
     </div>
     </router-link>
   </div>

@@ -3,7 +3,7 @@
     <!-- 최초에 로드되지 않은 movie(null)를 참조할 때 error가 발생하는 것을 막기 위해 v-if를 사용합니다-->
     <div v-if="movie" class="container">
       <div class="d-flex justify-content-between">
-        <router-link :to="{name: 'Home',}" type="button" class="btn btn-secondary me-auto" >뒤로</router-link>
+        <button @click="$router.go(-1)" class="btn btn-secondary me-auto" >뒤로</button>
         <div>좋아요 수: {{ count }}</div>
       </div>
       <div v-if="like" class="d-flex justify-content-end">

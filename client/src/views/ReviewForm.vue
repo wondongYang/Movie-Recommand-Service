@@ -20,7 +20,8 @@
     <div class="d-flex justify-content-end">
       <button v-if="isUpdate" class="btn btn-primary me-3" @click="updateReview">수정</button>
       <button v-else class="btn btn-primary me-3" @click="createReview">작성</button>
-      <router-link :to="{name: 'MovieDetail', params:{ movieId: this.$route.params.movieId }}" class="btn btn-secondary" >취소</router-link>
+      <button @click="$router.go(-1)" class="btn btn-secondary">취소</button>
+      <!-- <router-link :to="{name: 'MovieDetail', params:{ movieId: this.$route.params.movieId }}" class="btn btn-secondary" >취소</router-link> -->
       <!-- <router-link :to="{name: 'Home',}" class="btn btn-secondary" >취소</router-link> -->
     </div>
   </div>

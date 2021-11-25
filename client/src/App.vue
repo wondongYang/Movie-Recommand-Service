@@ -75,14 +75,11 @@ export default {
     }
 
     // 영화 들고 오기
-    // this.$store.dispatch('getHomeMovies')
-    this.$store.dispatch('getlatestMovies')
-    this.$store.dispatch('getlargestReviewMovies')
+    // (App 대신 Home이 로드될 때 들고 오는 것으로 수정했습니다.)
 
     // 필요한 장르는 일단 여기다 집어넣으시면 됩니다. (Home 부분도 연동되게 하면 좋을듯...!)
     let homeGenres = ['action', 'drama', 'animation']
     for (let genre of homeGenres) {
-      console.log(genre)
       this.$store.dispatch('getGenreMovies', genre)
     }
   }
@@ -117,5 +114,9 @@ export default {
 
 .box-shade {
   box-shadow: 0px 4px 5px 0px;
+}
+
+.wb-keep-all {
+  word-break: keep-all;
 }
 </style>
