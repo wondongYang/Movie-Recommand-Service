@@ -7,7 +7,8 @@
     <v-pagination
       class="d-flex justify-content-center"
       v-model="curPageNum"
-      :page-count="search_movie_numOfPages"> 
+      :page-count="search_movie_numOfPages"
+      > 
     </v-pagination>
   </div>
 </template>
@@ -24,7 +25,7 @@ export default {
   data: function () {
     return {
       dataPerPage: 5,
-      curPageNum: 1.
+      curPageNum: 1.,
     }
   },
   props: {
@@ -43,7 +44,12 @@ export default {
     search_movie_calData() {
       return this.movies.slice(this.startOffset, this.endOffset)
     },
-  }
+  },
+  watch: {
+    movies: function () {
+      this.curPageNum = 1
+    }
+  },
 }
 </script>
 

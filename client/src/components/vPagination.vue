@@ -182,6 +182,7 @@
       },
 
       goto(page) {
+        console.log(page)
         this.$emit('input', page)
       },
 
