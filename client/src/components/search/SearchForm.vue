@@ -20,9 +20,7 @@ export default {
   },
   methods: {
     inputSearch: function (query) {
-      console.log('wow')
       if (_.trim(query)) {
-        console.log(query)
         this.$emit('inputSearch', query)
       }
     },
