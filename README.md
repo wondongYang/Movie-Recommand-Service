@@ -94,6 +94,8 @@ SoySource는 사용자가 '좋아요'를 표시한 영화 정보를 기반으로
 
 
 # 배포
+
 django server: http://3.19.70.45/
+
 vue client: https://tender-bell-02c22f.netlify.app/
 
