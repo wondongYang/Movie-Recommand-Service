@@ -74,11 +74,11 @@
   const defaultClasses = {
     ul: 'pagination',
     li: 'pagination-item',
-    liActive: 'pagination-item--active',
-    liDisable: 'pagination-item--disable',
-    button: 'pagination-link',
-    buttonActive: 'pagination-link--active',
-    buttonDisable: 'pagination-link--disable'
+    liActive: 'pagination-item--active page-item active',
+    liDisable: 'pagination-item--disable page-item disabled',
+    button: 'pagination-link page-link',
+    buttonActive: 'pagination-link--active page-link active',
+    buttonDisable: 'pagination-link--disable page-link disabled'
   }
 
   const defaultLabels = {

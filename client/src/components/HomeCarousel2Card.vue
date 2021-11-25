@@ -34,7 +34,6 @@ export default {
   computed: {
     fullPosterPath: function () {
       const basePosterPath = 'https://image.tmdb.org/t/p/original'
-      console.log(this.movie)
       return (basePosterPath + this.movie.poster_path)
     }
   },

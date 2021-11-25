@@ -106,10 +106,6 @@
             v-model="writeCommentcurPageNum"
             :page-count="write_comment_numOfPages"> 
           </v-pagination>
-
-          <!-- <div v-for="(comment, commentIdx) in person.comment_set" :key="'comment_'+commentIdx">
-            <p>{{comment.content}}</p>
-          </div> -->
         </div>
       </div>
       <div class="col-md-4 col-12 text-end">
@@ -135,7 +131,8 @@ export default {
   },
   data: function () {
     return {
-      person: {},
+      person: {
+      },
       dataPerPage: 5,
       likeMoviecurPageNum: 1,
       likeReviewcurPageNum: 1,
@@ -151,7 +148,6 @@ export default {
       })
       .then(response => {
         this.person = response.data
-        console.log(this.person)
       })
       .catch(error => {
         console.log(error)
@@ -251,15 +247,6 @@ export default {
       }
 
       return year + '.' + month + '.' + day + ' ' + hour + '시 ' + min + '분'; 
-    }
-  },
-  watch: {
-    person: function () {
-      this.likeMoviecurPageNum
-      this.likeReviewcurPageNum
-      this.writeReviewcurPageNum
-      this.writeCommentcurPageNum
-
     }
   },
 }
