@@ -6,7 +6,7 @@
           <h1 v-else>{{ person.username }}님의 프로필입니다.</h1>
         <div>
           <p>
-            가입일: {{ person.date_joined }} <br>
+            가입일: {{ person.date_joined | yyyyMMdd}} <br>
             <br>
           </p>
         </div>
@@ -203,7 +203,36 @@ export default {
     contentAbbr: function (content) {
       return (content.length < 20 ? content : content.slice(0, 20) + ' ...')
     },
+    yyyyMMdd: function (value) {
+      // 현재 Date 혹은 DateTime 데이터를 javaScript date 타입화
+      var js_date = new Date(value);
+
+      var year = js_date.getFullYear();
+      var month = js_date.getMonth() + 1;
+      var day = js_date.getDate();
+      var hour = js_date.getHours();
+      var min = js_date.getMinutes();
+
+      if(month < 10){
+        month = '0' + month;
+      }
+
+      if(day < 10){
+        day = '0' + day;
+      }
+
+      if(hour < 10){
+        hour = '0' + hour;
+      }
+
+      if(min < 10){
+        min = '0' + min;
+      }
+
+      return year + '.' + month + '.' + day + ' ' + hour + '시 ' + min + '분'; 
+    }
   },
+  
 }
 </script>
 
