@@ -25,7 +25,6 @@ export default {
   methods: {
     getSearch: function (query) {
       this.query = query
-      console.log('send')
       axios({
         method: 'get',
         url: `${SERVER_URL}/movies/search/`,
