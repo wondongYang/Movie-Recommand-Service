@@ -11,7 +11,7 @@
 
 ## 기획 단계 ERD
 
-![initial-Movie App.drawio](README.assets\initial-Movie App.drawio.png)
+![initial-Movie App drawio](https://user-images.githubusercontent.com/55439547/143378494-7257384e-cb9d-4226-b587-d197d1c2551f.png)
 
 ## 영화 정보 탑재
 
@@ -21,11 +21,10 @@
 
 ## 영화 정보 기반 추천 서비스
 
-
-
 # ERD
 
-![after-Movie App.drawio](README.assets\after-Movie App.drawio.png)
+![after-Movie App drawio](https://user-images.githubusercontent.com/55439547/143378525-57376966-110b-4bdd-9166-81e1271d0549.png)
+
 
 
 
