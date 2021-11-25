@@ -7,8 +7,11 @@
 
 조성한 (chosnhn1@gmail.com / toor21@naver.com)
 
-
 # 목표 서비스 구현
+
+## 기획 단계 ERD
+
+![initial-Movie App.drawio](C:\Users\toor21\Desktop\ssafy6\Nov_OTT_project\README.assets\initial-Movie App.drawio.png)
 
 ## 영화 정보 탑재
 
@@ -22,6 +25,7 @@
 
 # ERD
 
+![after-Movie App.drawio](C:\Users\toor21\Desktop\ssafy6\Nov_OTT_project\README.assets\after-Movie App.drawio.png)
 
 
 
@@ -60,5 +64,7 @@ SoySource는 TMDB API를 사용하여 10,000여 건의 영화 정보를 데이�
 ### 영화 추천 기능
 
 SoySource는 사용자가 '좋아요'를 표시한 영화 정보를 기반으로 영화 데이터베이스의 장르 정보를 활용하여 사용자에게 개인화된 영화 추천 기능을 제공합니다.
+
+
 
 # 배포
