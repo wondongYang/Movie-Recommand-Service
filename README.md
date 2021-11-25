@@ -44,8 +44,7 @@
 # 기능
 
 ## 메인 Page
-
-
+![메인 page](https://user-images.githubusercontent.com/66405226/143386381-cab724e9-5f8b-489f-b494-19bee409f420.JPG)
 
 ## 커뮤니티 기능
 
