@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <div id="nav" class="navbar navbar-expand-lg navbar-light bg-light sticky-top mb-5">
+    <div id="nav" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
       <div class="container-fluid">
         <router-link class="navbar-brand me-auto text-decoration-none" :to="{name: 'Home'}">
         <img src="./assets/5760.jpg" alt="" width="20" height="20" class="d-inline-block align-text-top">
