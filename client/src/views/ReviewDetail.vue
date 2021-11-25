@@ -32,7 +32,7 @@
           <div>
             <br>
             <p>{{ review.content }}</p>
-            <p class="text-end">{{ review.updated_at }}</p>
+            <p class="text-end">{{ review.updated_at | yyyyMMdd }}</p>
           </div>
           <div v-if="username === review.user.username" class="text-end">
             <router-link :to="{name: 'UpdateReviewForm', params:{reviewId: review.id, movieId: review.movie.id}}">
@@ -194,6 +194,36 @@ export default {
   created: function () {
     this.getReview()
   },
+  filters: {
+    yyyyMMdd: function (value) {
+      // 현재 Date 혹은 DateTime 데이터를 javaScript date 타입화
+      var js_date = new Date(value);
+
+      var year = js_date.getFullYear();
+      var month = js_date.getMonth() + 1;
+      var day = js_date.getDate();
+      var hour = js_date.getHours();
+      var min = js_date.getMinutes();
+
+      if(month < 10){
+        month = '0' + month;
+      }
+
+      if(day < 10){
+        day = '0' + day;
+      }
+
+      if(hour < 10){
+        hour = '0' + hour;
+      }
+
+      if(min < 10){
+        min = '0' + min;
+      }
+
+      return year + '.' + month + '.' + day + ' ' + hour + '시 ' + min + '분'; 
+    }
+  }
 }
 </script>
 
