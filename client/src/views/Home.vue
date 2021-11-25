@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div>
-      <div class="bg-dark">NEW</div>
+      <div class="bg-dark p-3 fs-2 fw-bold"><p class="text-white" style="margin: 0;">NEW</p></div>
       <HomeCarousel2 :movies="latestMovies" />
       <hr>
       <h3>좋아요를 많이 받은 영화</h3>
