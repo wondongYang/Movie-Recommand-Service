@@ -12,7 +12,7 @@
         </div>
         <div>
           <p>좋아하는 영화</p>
-          <div class="d-flex flex-wrap">
+          <div class="d-flex flex-wrap">  
             <div v-for="(movie, movieIdx) in like_movie_calData" :key="'like_movies_'+movieIdx">
               <router-link :to="{name: 'MovieDetail', params:{movieId: movie.id}}">
               <MovieSmallcard :movie="movie" />
@@ -21,7 +21,7 @@
           </div>
           <v-pagination
             class="d-flex justify-content-center"
-            v-model="curPageNum"
+            v-model="likeMoviecurPageNum"
             :page-count="like_movie_numOfPages"> 
           </v-pagination>
           <p>좋아하는 리뷰</p>
@@ -49,7 +49,7 @@
           </table>
           <v-pagination
             class="d-flex justify-content-center"
-            v-model="curPageNum"
+            v-model="likeReviewcurPageNum"
             :page-count="like_review_numOfPages"> 
           </v-pagination>
 
@@ -84,7 +84,7 @@
           </table>
           <v-pagination
             class="d-flex justify-content-center"
-            v-model="curPageNum"
+            v-model="writeReviewcurPageNum"
             :page-count="write_review_numOfPages"> 
           </v-pagination>
           <br>
@@ -103,7 +103,7 @@
           </table>
           <v-pagination
             class="d-flex justify-content-center"
-            v-model="curPageNum"
+            v-model="writeCommentcurPageNum"
             :page-count="write_comment_numOfPages"> 
           </v-pagination>
 
@@ -137,7 +137,10 @@ export default {
     return {
       person: {},
       dataPerPage: 5,
-      curPageNum: 1,
+      likeMoviecurPageNum: 1,
+      likeReviewcurPageNum: 1,
+      writeReviewcurPageNum: 1,
+      writeCommentcurPageNum: 1,
     }
   },
   methods: {
@@ -157,39 +160,57 @@ export default {
   },
   computed: {
     ...mapState(['username']),
-    startOffset() {
-      return ((this.curPageNum - 1) * this.dataPerPage);
+    likeMoviestartOffset() {
+      return ((this.likeMoviecurPageNum - 1) * this.dataPerPage);
     },
-    endOffset() {
-      return (this.startOffset + this.dataPerPage);
+    likeMovieendOffset() {
+      return (this.likeMoviestartOffset + this.dataPerPage);
+    },
+    likeReviewstartOffset() {
+      return ((this.likeReviewcurPageNum - 1) * this.dataPerPage);
+    },
+    likeReviewendOffset() {
+      return (this.likeReviewstartOffset + this.dataPerPage);
+    },
+    writeReviewstartOffset() {
+      return ((this.writeReviewcurPageNum - 1) * this.dataPerPage);
+    },
+    writeReviewendOffset() {
+      return (this.writeReviewstartOffset + this.dataPerPage);
+    },
+    writeCommentstartOffset() {
+      return ((this.writeCommentcurPageNum - 1) * this.dataPerPage);
+    },
+    writeCommentendOffset() {
+      return (this.writeCommentstartOffset + this.dataPerPage);
     },
     // 좋아하는 영화 pagination
     like_movie_numOfPages() {
       return Math.ceil(this.person.like_movies.length / this.dataPerPage);
     },
     like_movie_calData() {
-      return this.person.like_movies.slice(this.startOffset, this.endOffset)
+      return this.person.like_movies.slice(this.likeMoviestartOffset, this.likeMovieendOffset)
     },
     // 좋아하는 리뷰 pagination
     like_review_numOfPages() {
       return Math.ceil(this.person.like_reviews.length / this.dataPerPage);
     },
     like_review_calData() {
-      return this.person.like_reviews.slice(this.startOffset, this.endOffset)
+      return this.person.like_reviews.slice(this.likeReviewstartOffset, this.likeReviewendOffset)
     },
     // 작성 리뷰 pagination
     write_review_numOfPages() {
       return Math.ceil(this.person.review_set.length / this.dataPerPage);
     },
     write_review_calData() {
-      return this.person.review_set.slice(this.startOffset, this.endOffset)
+      return this.person.review_set.slice(this.writeReviewstartOffset, this.writeReviewendOffset)
     },
     // 작성 댓글 pagination
     write_comment_numOfPages() {
       return Math.ceil(this.person.comment_set.length / this.dataPerPage);
     },
     write_comment_calData() {
-      return this.person.comment_set.slice(this.startOffset, this.endOffset)
+      return this.person.comment_set.slice(this.writeCommentstartOffset, this.writeCommentendOffset)
     }
   },
   mounted: function () {
@@ -232,7 +253,15 @@ export default {
       return year + '.' + month + '.' + day + ' ' + hour + '시 ' + min + '분'; 
     }
   },
-  
+  watch: {
+    person: function () {
+      this.likeMoviecurPageNum
+      this.likeReviewcurPageNum
+      this.writeReviewcurPageNum
+      this.writeCommentcurPageNum
+
+    }
+  },
 }
 </script>
 

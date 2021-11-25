@@ -1,9 +1,14 @@
 <template>
   <div>
-    <p>{{ genre }}를 좋아하는 {{ username}}님, 혹시 이 영화는 보셨나요?</p>
-    <div class="d-flex flex-wrap justify-content-evenly p-3">
-      <div v-for="(movie, idx) in movies" :key="idx">
-        <MovieCard :movie="movie" />
+    <div v-if="genre == ''">
+      <p>좋아하는 영화에 좋아요와 리뷰를 남기면 <br>새 영화를 추천해드립니다!</p>
+    </div>
+    <div v-else>
+      <p>{{ genre }}를 좋아하는 {{ username}}님, 혹시 이 영화는 보셨나요?</p>
+      <div class="d-flex flex-wrap justify-content-evenly p-3">
+        <div v-for="(movie, idx) in movies" :key="idx">
+          <MovieCard :movie="movie" />
+        </div>
       </div>
     </div>
   </div>
