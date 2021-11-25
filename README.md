@@ -11,7 +11,7 @@
 
 ## 기획 단계 ERD
 
-![initial-Movie App.drawio](C:\Users\toor21\Desktop\ssafy6\Nov_OTT_project\README.assets\initial-Movie App.drawio.png)
+![initial-Movie App.drawio](README.assets\initial-Movie App.drawio.png)
 
 ## 영화 정보 탑재
 
@@ -25,7 +25,7 @@
 
 # ERD
 
-![after-Movie App.drawio](C:\Users\toor21\Desktop\ssafy6\Nov_OTT_project\README.assets\after-Movie App.drawio.png)
+![after-Movie App.drawio](README.assets\after-Movie App.drawio.png)
 
 
 
@@ -68,3 +68,5 @@ SoySource는 사용자가 '좋아요'를 표시한 영화 정보를 기반으로
 
 
 # 배포
+
+http://18.117.248.203:
